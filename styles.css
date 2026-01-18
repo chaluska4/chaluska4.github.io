@@ -5,6 +5,27 @@
     box-sizing: border-box;
 }
 
+/* Skip to main content link for accessibility */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    background: var(--accent-blue);
+    color: var(--text-primary);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    z-index: 10000;
+    font-weight: 500;
+    border-radius: 0 0 4px 0;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--accent-light);
+    outline-offset: 2px;
+}
+
 :root {
     /* Corporate, finance-forward color palette - Goldman Sachs inspired */
     --bg-primary: #1a1d23;
@@ -136,6 +157,14 @@ body {
     transition: color 0.2s ease;
     position: relative;
     letter-spacing: 0.2px;
+    display: inline-block;
+    padding: 0.5rem 0;
+}
+
+.nav-link:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 4px;
+    border-radius: 2px;
 }
 
 .nav-link::after {
@@ -164,6 +193,20 @@ body {
     flex-direction: column;
     cursor: pointer;
     gap: 4px;
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.nav-toggle:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+.nav-toggle:hover {
+    background-color: rgba(45, 74, 110, 0.1);
 }
 
 .bar {
@@ -256,6 +299,15 @@ body {
     font-size: 0.875rem;
     transition: all 0.2s ease;
     letter-spacing: 0.2px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cta-button:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 2px;
 }
 
 .cta-primary {
@@ -444,6 +496,15 @@ body {
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
     font-family: inherit;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.tab-button:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+    border-radius: 2px;
 }
 
 .tab-button:hover {
@@ -1049,6 +1110,15 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     outline: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-tab-button:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
 }
 
 .project-tab-button:hover {
@@ -1066,11 +1136,15 @@ body {
 
 .projects-content {
     position: relative;
+    padding-top: 0;
+    margin-top: 0;
 }
 
 .project-tab-pane {
     display: none;
     animation: fadeIn 0.3s ease;
+    padding-top: 0;
+    margin-top: 0;
 }
 
 .project-tab-pane.active {
@@ -1080,15 +1154,24 @@ body {
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: 1fr;
     gap: 1.5rem;
     max-width: 1100px;
     margin: 0 auto;
+    padding-top: 0;
+    margin-top: 0;
+    align-content: start;
+    align-items: stretch;
+}
+
+.projects-grid > .project-card {
+    height: 100%;
 }
 
 .project-card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
-    padding: 0.75rem 1.5rem 1.5rem 1.5rem;
+    padding: 16px 20px 20px 20px;
     border-radius: 4px;
     transition: all 0.2s ease;
     position: relative;
@@ -1096,6 +1179,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 0;
+    height: 100%;
 }
 
 .project-card:hover {
@@ -1216,16 +1301,23 @@ body {
     padding: 0;
 }
 
-.temple-certificate-card > * {
+.temple-certificate-card > *:not(.temple-logo-overlay) {
     position: relative;
     z-index: 2;
 }
 
+/* Ensure h3 has no top margin/padding and aligns with other cards */
 .temple-certificate-card h3 {
-    margin-top: 0;
+    margin-top: 0 !important;
     margin-bottom: 0.375rem;
-    padding-top: 0;
+    padding-top: 0 !important;
     width: 100%;
+}
+
+/* Target the h3 that immediately follows the overlay */
+.temple-logo-overlay + h3 {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 .temple-certificate-card h3,
@@ -1673,6 +1765,43 @@ body {
     gap: 1.5rem;
 }
 
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.form-error {
+    font-size: 0.75rem;
+    color: #ef4444;
+    min-height: 1.25rem;
+    display: block;
+    margin-top: 0.25rem;
+}
+
+.form-input.error,
+.form-input:invalid:not(:placeholder-shown):not(:focus) {
+    border-color: #ef4444;
+}
+
+.form-input.error:focus {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12),
+                0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.form-error {
+    display: block;
+    min-height: 1.25rem;
+}
+
 .form-input {
     background: linear-gradient(
         to bottom,
@@ -1714,6 +1843,11 @@ body {
                 0 2px 4px rgba(0, 0, 0, 0.1),
                 inset 0 1px 0 rgba(255, 255, 255, 0.03);
     transform: translateY(-1px);
+}
+
+.form-input:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
 }
 
 .form-input:hover:not(:focus) {
@@ -1813,6 +1947,43 @@ body {
                 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
+.form-submit:focus-visible {
+    outline: 2px solid var(--accent-light);
+    outline-offset: 2px;
+}
+
+.form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.submit-text {
+    display: inline-block;
+}
+
+.submit-loader {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: var(--text-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.form-submit.loading .submit-text {
+    display: none;
+}
+
+.form-submit.loading .submit-loader {
+    display: inline-block;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
 .contact-social {
     display: flex;
     gap: 1.5rem;
@@ -1879,6 +2050,17 @@ body {
 
 .social-link:active {
     transform: translateY(-1px) scale(1);
+}
+
+.social-link:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+.logo-link:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 4px;
+    border-radius: 4px;
 }
 
 .social-link svg {
@@ -1960,6 +2142,7 @@ body {
     }
 }
 
+/* Improved mobile touch targets and spacing */
 @media (max-width: 768px) {
     .logo-square {
         width: 38px;
@@ -1969,6 +2152,70 @@ body {
     .logo-monogram {
         font-size: 0.8125rem;
         letter-spacing: 1px;
+    }
+
+    .hero-buttons {
+        gap: 0.75rem;
+    }
+
+    .cta-button {
+        min-height: 48px;
+        padding: 12px 24px;
+        font-size: 0.9375rem;
+    }
+
+    .tab-button {
+        min-height: 48px;
+        padding: 12px 16px;
+        font-size: 0.9375rem;
+    }
+
+    .project-tab-button {
+        min-height: 48px;
+        padding: 12px 1.5rem;
+    }
+
+    .contact-info-card {
+        padding: 1.5rem;
+    }
+
+    .contact-icon {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+    }
+
+    .contact-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .social-link {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+    }
+
+    .social-link svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .form-input {
+        min-height: 48px;
+        padding: 14px 1.25rem;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+
+    .form-textarea {
+        min-height: 180px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+
+    .form-submit {
+        min-height: 48px;
+        padding: 14px 32px;
+        width: 100%;
     }
 
     .nav-menu {
@@ -2109,6 +2356,99 @@ body {
         gap: 2rem;
     }
 
+    .projects-grid {
+        gap: 1.25rem;
+    }
+
+    .project-card {
+        padding: 1rem 1.25rem 1.25rem 1.25rem;
+    }
+
+    .section {
+        padding: 56px 0;
+    }
+
+    .hero {
+        padding-top: 56px;
+        min-height: calc(100vh - 56px);
+    }
+
+    .hero-content {
+        padding: 2rem 0;
+    }
+
+}
+
+/* Desktop optimizations */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1400px;
+        padding: 0 48px;
+    }
+
+    .hero-container {
+        max-width: 900px;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-description {
+        font-size: 0.9375rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    .contact-content-wrapper {
+        gap: 4rem;
+    }
+
+    .section {
+        padding: 80px 0;
+    }
+
+    .about-content {
+        gap: 3rem;
+    }
+}
+
+/* Improved focus states for all interactive elements */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #4a5568;
+        --text-secondary: #e2e8f0;
+    }
 }
 
 @media (max-width: 480px) {

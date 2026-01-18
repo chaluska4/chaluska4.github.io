@@ -12,35 +12,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#home" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="#home" class="logo-link">
+                <a href="#home" class="logo-link" aria-label="Colin Haluska - Home">
                     <div class="logo-square">
                         <span class="logo-monogram">CH</span>
                     </div>
                 </a>
             </div>
-            <ul class="nav-menu" id="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
+            <ul class="nav-menu" id="nav-menu" role="menubar">
+                <li class="nav-item" role="none">
+                    <a href="#home" class="nav-link" role="menuitem">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
+                <li class="nav-item" role="none">
+                    <a href="#about" class="nav-link" role="menuitem">About</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projects</a>
+                <li class="nav-item" role="none">
+                    <a href="#projects" class="nav-link" role="menuitem">Projects</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
+                <li class="nav-item" role="none">
+                    <a href="#contact" class="nav-link" role="menuitem">Contact</a>
                 </li>
             </ul>
-            <div class="nav-toggle" id="nav-toggle">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -50,7 +53,6 @@
             <div class="hero-content">
                 <h1 class="hero-title">Colin Haluska</h1>
                 <p class="hero-subtitle">Finance & Business Professional | Muhlenberg College | Class of 2027</p>
-                <p class="hero-description">Annuity Operations Intern at SFG Annuities, Brielle NJ</p>
                 <div class="hero-buttons">
                     <a href="#about" class="cta-button cta-primary">Learn More</a>
                     <a href="#projects" class="cta-button cta-secondary">View My Projects</a>
@@ -73,27 +75,19 @@
                 </div>
                 <div class="about-main">
                     <p class="about-summary">
-                        I'm a finance and business double major graduating in 2027, with a strong interest in financial operations and strategic business analysis. I currently work as an Annuity Operations Intern, where I've built a solid foundation in financial principles and developed a detail-oriented, disciplined approach to my work. Alongside my academic and professional interests, I also enjoy coding and AI, which I explore through hands-on projects, including building this website myself.
+                        I'm a finance and business double major graduating in 2027, with a strong interest in financial operations and strategic business analysis. I have accepted an offer and am anticipating to work as an annuity operations intern, where I will build a solid foundation in financial principles and develop a detail-oriented, disciplined approach to my work. Alongside my academic and professional interests, I also enjoy coding and AI, which I explore through hands-on projects, including building this website.
                     </p>
                     <div class="about-tabs">
-                        <div class="tab-buttons">
-                            <button class="tab-button active" data-tab="skills">Skills</button>
-                            <button class="tab-button" data-tab="experience">Experience</button>
-                            <button class="tab-button" data-tab="education">Education</button>
-                            <button class="tab-button" data-tab="certifications">Certifications</button>
+                        <div class="tab-buttons" role="tablist" aria-label="About section tabs">
+                            <button class="tab-button active" data-tab="skills" role="tab" aria-selected="true" aria-controls="tab-skills" id="tab-button-skills">Skills</button>
+                            <button class="tab-button" data-tab="experience" role="tab" aria-selected="false" aria-controls="tab-experience" id="tab-button-experience">Experience</button>
+                            <button class="tab-button" data-tab="education" role="tab" aria-selected="false" aria-controls="tab-education" id="tab-button-education">Education</button>
+                            <button class="tab-button" data-tab="certifications" role="tab" aria-selected="false" aria-controls="tab-certifications" id="tab-button-certifications">Certifications</button>
                         </div>
                         <div class="tab-content">
-                            <div class="tab-pane active" id="tab-skills">
+                            <div class="tab-pane active" id="tab-skills" role="tabpanel" aria-labelledby="tab-button-skills">
                                 <h3>Skills</h3>
                                 <div class="skills-grid">
-                                    <div class="skill-category">
-                                        <h4>Web & Technical</h4>
-                                        <p>HTML, CSS, JavaScript; responsive website development</p>
-                                    </div>
-                                    <div class="skill-category">
-                                        <h4>Business & Productivity</h4>
-                                        <p>Microsoft Excel, Word, PowerPoint</p>
-                                    </div>
                                     <div class="skill-category">
                                         <h4>Financial & Market Tools</h4>
                                         <p>Bloomberg Terminal (introductory proficiency)</p>
@@ -102,9 +96,17 @@
                                         <h4>Analytical</h4>
                                         <p>Data analysis fundamentals, process improvement, attention to detail</p>
                                     </div>
+                                    <div class="skill-category">
+                                        <h4>Business & Productivity</h4>
+                                        <p>Microsoft Excel, Word, PowerPoint</p>
+                                    </div>
+                                    <div class="skill-category">
+                                        <h4>Web & Technical</h4>
+                                        <p>HTML, CSS, JavaScript; responsive website development</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab-experience">
+                            <div class="tab-pane" id="tab-experience" role="tabpanel" aria-labelledby="tab-button-experience">
                                 <div class="experience-timeline">
                                     <div class="experience-item">
                                         <div class="experience-marker">
@@ -116,7 +118,7 @@
                                             <p class="experience-company">Financial Services Company | Incoming Position</p>
                                             <div class="experience-date-badge">Incoming Position</div>
                                             <p class="experience-description">
-                                                I will be joining the annuity operations team, where I will apply my academic background in finance and business to day-to-day financial services operations. The role provides hands-on exposure to annuity servicing, client communication, and operational workflows within a regulated financial environment.
+                                                I expect to join the annuity operations team, where I will apply my academic background in finance and business to day-to-day financial services operations. The role provides hands-on exposure to annuity servicing, client communication, and operational workflows within a regulated financial environment.
                                             </p>
                                             <div class="experience-role-focus">
                                                 <h4>Role Focus (Incoming):</h4>
@@ -132,7 +134,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab-education">
+                            <div class="tab-pane" id="tab-education" role="tabpanel" aria-labelledby="tab-button-education">
                                 <div class="education-timeline">
                                     <div class="education-item">
                                         <div class="education-marker">
@@ -148,15 +150,6 @@
                                                 <h4>Relevant Coursework</h4>
                                                 
                                                 <div class="coursework-category">
-                                                    <h5>Finance</h5>
-                                                    <ul class="course-list">
-                                                        <li>Corporate Finance (FIN 237)</li>
-                                                        <li>Math for Financial Analysis (FIN 311)</li>
-                                                        <li>Money, Banking, and Financial Markets (FIN 330)</li>
-                                                    </ul>
-                                                </div>
-                                                
-                                                <div class="coursework-category">
                                                     <h5>Business</h5>
                                                     <ul class="course-list">
                                                         <li>AI in Business: Applications & Strategy (BUS 288)</li>
@@ -164,6 +157,15 @@
                                                         <li>Management (BUS 236)</li>
                                                         <li>Marketing (BUS 239)</li>
                                                         <li>Project Management Theory & Practice (BUS 385)</li>
+                                                    </ul>
+                                                </div>
+                                                
+                                                <div class="coursework-category">
+                                                    <h5>Finance</h5>
+                                                    <ul class="course-list">
+                                                        <li>Corporate Finance (FIN 237)</li>
+                                                        <li>Math for Financial Analysis (FIN 311)</li>
+                                                        <li>Money, Banking, and Financial Markets (FIN 330)</li>
                                                     </ul>
                                                 </div>
                                                 
@@ -188,7 +190,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab-certifications">
+                            <div class="tab-pane" id="tab-certifications" role="tabpanel" aria-labelledby="tab-button-certifications">
                                 <div class="certifications-grid">
                                     <div class="certification-card">
                                         <div class="cert-logo bloomberg-logo">
@@ -232,13 +234,13 @@
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             <div class="projects-tabs">
-                <div class="project-tab-buttons">
-                    <button class="project-tab-button active" data-project-tab="all">All</button>
-                    <button class="project-tab-button" data-project-tab="website">Website Development</button>
-                    <button class="project-tab-button" data-project-tab="upcoming">Upcoming Projects</button>
+                <div class="project-tab-buttons" role="tablist" aria-label="Project category tabs">
+                    <button class="project-tab-button active" data-project-tab="all" role="tab" aria-selected="true" aria-controls="project-tab-all" id="project-tab-button-all">All</button>
+                    <button class="project-tab-button" data-project-tab="website" role="tab" aria-selected="false" aria-controls="project-tab-website" id="project-tab-button-website">Website Development</button>
+                    <button class="project-tab-button" data-project-tab="upcoming" role="tab" aria-selected="false" aria-controls="project-tab-upcoming" id="project-tab-button-upcoming">Upcoming Projects</button>
                 </div>
                 <div class="projects-content">
-                    <div class="project-tab-pane active" id="project-tab-all">
+                    <div class="project-tab-pane active" id="project-tab-all" role="tabpanel" aria-labelledby="project-tab-button-all">
                         <div class="projects-grid">
                             <div class="project-card portfolio-website-card" data-category="website">
                                 <h3>Personal Portfolio Website</h3>
@@ -300,7 +302,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="project-tab-pane" id="project-tab-website">
+                    <div class="project-tab-pane" id="project-tab-website" role="tabpanel" aria-labelledby="project-tab-button-website">
                         <div class="projects-grid">
                             <div class="project-card portfolio-website-card" data-category="website">
                                 <h3>Personal Portfolio Website</h3>
@@ -325,7 +327,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="project-tab-pane" id="project-tab-upcoming">
+                    <div class="project-tab-pane" id="project-tab-upcoming" role="tabpanel" aria-labelledby="project-tab-button-upcoming">
                         <div class="projects-grid">
                             <div class="project-card temple-certificate-card" data-category="upcoming">
                                 <div class="temple-logo-overlay"></div>
@@ -437,12 +439,31 @@
                     </div>
                 </div>
                 <div class="contact-form-column">
-                    <form class="contact-form" id="contact-form">
-                        <input type="text" name="name" placeholder="Your Name" class="form-input" required>
-                        <input type="email" name="email" placeholder="Your Email" class="form-input" required>
-                        <input type="text" name="subject" placeholder="Subject" class="form-input" required>
-                        <textarea name="message" placeholder="Your Message" class="form-input form-textarea" rows="6" required></textarea>
-                        <button type="submit" class="form-submit">Send Message</button>
+                    <form class="contact-form" id="contact-form" novalidate>
+                        <div class="form-group">
+                            <label for="contact-name" class="form-label">Your Name</label>
+                            <input type="text" id="contact-name" name="name" placeholder="Your Name" class="form-input" required aria-required="true" aria-describedby="name-error">
+                            <span class="form-error" id="name-error" role="alert"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email" class="form-label">Your Email</label>
+                            <input type="email" id="contact-email" name="email" placeholder="Your Email" class="form-input" required aria-required="true" aria-describedby="email-error">
+                            <span class="form-error" id="email-error" role="alert"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject" class="form-label">Subject</label>
+                            <input type="text" id="contact-subject" name="subject" placeholder="Subject" class="form-input" required aria-required="true" aria-describedby="subject-error">
+                            <span class="form-error" id="subject-error" role="alert"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message" class="form-label">Your Message</label>
+                            <textarea id="contact-message" name="message" placeholder="Your Message" class="form-input form-textarea" rows="6" required aria-required="true" aria-describedby="message-error"></textarea>
+                            <span class="form-error" id="message-error" role="alert"></span>
+                        </div>
+                        <button type="submit" class="form-submit">
+                            <span class="submit-text">Send Message</span>
+                            <span class="submit-loader" aria-hidden="true"></span>
+                        </button>
                     </form>
                 </div>
             </div>
