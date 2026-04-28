@@ -1585,19 +1585,32 @@ body {
 .project-competencies {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.55rem;
+    gap: 0.625rem;
     width: 100%;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .project-competencies span {
-    font-size: 0.75rem;
+    display: inline-block;
+    font-size: 0.6875rem;
     color: var(--text-primary);
-    padding: 0.4rem 0.6rem;
-    background-color: rgba(26, 29, 35, 0.78);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    background-color: rgba(26, 29, 35, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.28);
     border-radius: 4px;
-    line-height: 1.4;
+    line-height: 1.3;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+.project-competencies span:hover {
+    background-color: rgba(45, 74, 110, 0.25);
+    border-color: rgba(255, 255, 255, 0.38);
+    transform: translateY(-1px);
 }
 
 .chi-investments-card {
