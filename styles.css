@@ -1486,7 +1486,7 @@ body {
 }
 
 .project-actions {
-    margin-top: 1.25rem;
+    margin-top: auto;
     padding-top: 1.25rem;
     border-top: 1px solid var(--border-light);
 }
@@ -1564,6 +1564,50 @@ body {
 .project-outcome strong {
     color: var(--text-primary);
     font-weight: 500;
+}
+
+.project-subtitle {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
+.project-summary {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.project-competencies {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.project-competencies span {
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    padding: 0.4rem 0.6rem;
+    background-color: rgba(26, 29, 35, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 4px;
+    line-height: 1.4;
+}
+
+.chi-investments-card {
+    border: 1px solid rgba(61, 90, 127, 0.85);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+}
+
+.chi-investments-card:hover {
+    border-color: rgba(93, 127, 168, 0.92);
+    box-shadow: 0 14px 32px rgba(18, 26, 37, 0.42);
 }
 
 /* Contact Section */
@@ -2362,6 +2406,10 @@ body {
 
     .project-card {
         padding: 1rem 1.25rem 1.25rem 1.25rem;
+    }
+
+    .project-competencies {
+        grid-template-columns: 1fr;
     }
 
     .section {
