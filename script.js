@@ -64,7 +64,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(href);
         
         if (target) {
-            const offsetTop = target.offsetTop - 56;
+            const offsetTop = target.offsetTop - 96;
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
@@ -195,9 +195,10 @@ projectTabButtons.forEach(button => {
 });
 
 // Minimal scroll animations using Intersection Observer
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -210,6 +211,10 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe sections for fade-in animation
 document.querySelectorAll('.section, .timeline-item, .competency-card, .project-card').forEach(el => {
+    if (prefersReducedMotion) {
+        el.classList.add('visible');
+        return;
+    }
     el.classList.add('fade-in');
     observer.observe(el);
 });
@@ -347,6 +352,52 @@ if (contactForm) {
     });
 }
 
+// Highlight hero index rail on scroll
+(function initHeroRail() {
+    const items = document.querySelectorAll('.hero-rail-item');
+    if (!items.length) return;
+
+    const map = [
+        { id: 'home', el: items[0] },
+        { id: 'about', el: items[1] },
+        { id: 'projects', el: items[2] },
+        { id: 'contact', el: items[3] }
+    ];
+
+    const sync = () => {
+        let current = 'home';
+        map.forEach(({ id }) => {
+            const section = document.getElementById(id);
+            if (section && window.pageYOffset >= section.offsetTop - 140) {
+                current = id;
+            }
+        });
+        map.forEach(({ id, el }) => {
+            el.classList.toggle('active', id === current);
+        });
+    };
+
+    window.addEventListener('scroll', sync, { passive: true });
+    sync();
+})();
+
+// Live UTC clock in status bar
+(function initStatusClock() {
+    const clock = document.getElementById('status-clock');
+    if (!clock) return;
+
+    const tick = () => {
+        const now = new Date();
+        const hh = String(now.getUTCHours()).padStart(2, '0');
+        const mm = String(now.getUTCMinutes()).padStart(2, '0');
+        const ss = String(now.getUTCSeconds()).padStart(2, '0');
+        clock.textContent = `UTC ${hh}:${mm}:${ss}`;
+    };
+
+    tick();
+    setInterval(tick, 1000);
+})();
+
 // Download Resume handler
 const downloadResume = document.getElementById('download-resume');
 if (downloadResume) {
@@ -355,3 +406,116 @@ if (downloadResume) {
         // No need to prevent default or show alert
     });
 }
+
+// Ambient terminal canvas — visible drifting ticks, dots, and faint trails
+(function initAmbientCanvas() {
+    const canvas = document.getElementById('ambient-canvas');
+    if (!canvas) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+        canvas.style.display = 'none';
+        return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = 0;
+    let height = 0;
+    let animationId = 0;
+    let particles = [];
+    let sparks = [];
+
+    const resize = () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const count = Math.max(42, Math.floor((width * height) / 28000));
+        particles = Array.from({ length: count }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.55,
+            vy: (Math.random() - 0.4) * 0.35,
+            size: Math.random() > 0.65 ? 2 : 1.2,
+            alpha: 0.35 + Math.random() * 0.45,
+            tick: Math.random() > 0.62
+        }));
+
+        sparks = Array.from({ length: 8 }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            len: 40 + Math.random() * 90,
+            speed: 0.8 + Math.random() * 1.4,
+            alpha: 0.2 + Math.random() * 0.35
+        }));
+    };
+
+    const draw = () => {
+        ctx.clearRect(0, 0, width, height);
+
+        for (const p of particles) {
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.x < -30) p.x = width + 30;
+            if (p.x > width + 30) p.x = -30;
+            if (p.y < -30) p.y = height + 30;
+            if (p.y > height + 30) p.y = -30;
+
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(184, 196, 214, ${p.alpha})`;
+            if (p.tick) {
+                ctx.fillRect(p.x, p.y, 10 + p.size * 5, 1.5);
+                ctx.fillStyle = `rgba(90, 134, 176, ${p.alpha * 0.7})`;
+                ctx.fillRect(p.x + 12 + p.size * 5, p.y, 3, 1.5);
+            } else {
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (const s of sparks) {
+            s.x += s.speed;
+            if (s.x > width + 120) {
+                s.x = -120;
+                s.y = Math.random() * height;
+            }
+            const grad = ctx.createLinearGradient(s.x, s.y, s.x + s.len, s.y);
+            grad.addColorStop(0, 'rgba(90, 134, 176, 0)');
+            grad.addColorStop(0.5, `rgba(232, 238, 247, ${s.alpha})`);
+            grad.addColorStop(1, 'rgba(90, 134, 176, 0)');
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(s.x, s.y);
+            ctx.lineTo(s.x + s.len, s.y);
+            ctx.stroke();
+        }
+
+        animationId = requestAnimationFrame(draw);
+    };
+
+    resize();
+    draw();
+
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resize, 120);
+    });
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            cancelAnimationFrame(animationId);
+        } else if (!prefersReducedMotion) {
+            draw();
+        }
+    });
+})();

@@ -9,11 +9,47 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
     <a href="#home" class="skip-link">Skip to main content</a>
+
+    <!-- Ambient finance-terminal background -->
+    <div id="ambient-bg" class="ambient-bg" aria-hidden="true">
+        <div class="ambient-grid"></div>
+        <div class="ambient-glow ambient-glow-a"></div>
+        <div class="ambient-glow ambient-glow-b"></div>
+        <div class="ambient-glow ambient-glow-c"></div>
+        <div class="ambient-orb ambient-orb-blue-1"></div>
+        <div class="ambient-orb ambient-orb-blue-2"></div>
+        <div class="ambient-orb ambient-orb-blue-3"></div>
+        <div class="ambient-orb ambient-orb-orange-1"></div>
+        <div class="ambient-orb ambient-orb-orange-2"></div>
+        <div class="ambient-orb ambient-orb-orange-3"></div>
+        <div class="ambient-scan"></div>
+        <div class="ambient-stream ambient-stream-1"></div>
+        <div class="ambient-stream ambient-stream-2"></div>
+        <div class="ambient-stream ambient-stream-3"></div>
+        <div class="ambient-chart"></div>
+        <canvas id="ambient-canvas" class="ambient-canvas"></canvas>
+    </div>
+
+    <!-- System status bar -->
+    <div class="status-bar" aria-label="Profile status">
+        <div class="status-bar-inner">
+            <div class="status-left">
+                <span>/ COLIN_HALUSKA /</span>
+                <span class="status-muted">FINANCE-TERMINAL.V26</span>
+            </div>
+            <div class="status-right">
+                <span class="status-item"><i class="status-dot"></i>STATUS <strong>OPEN TO ROLES</strong></span>
+                <span class="status-item"><i class="status-dot"></i>FOCUS <strong>ANNUITY OPS · FINTECH · AI</strong></span>
+                <span class="status-item"><i class="status-dot"></i>BASE <strong>ABERDEEN, NJ</strong></span>
+                <span class="status-item status-clock" id="status-clock">UTC --:--:--</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
@@ -30,7 +66,7 @@
                     <a href="#home" class="nav-link" role="menuitem">Home</a>
                 </li>
                 <li class="nav-item" role="none">
-                    <a href="#about" class="nav-link" role="menuitem">About</a>
+                    <a href="#about" class="nav-link" role="menuitem">Profile</a>
                 </li>
                 <li class="nav-item" role="none">
                     <a href="#projects" class="nav-link" role="menuitem">Projects</a>
@@ -49,175 +85,250 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <aside class="hero-rail" aria-label="Page index">
+            <span class="hero-rail-label">INDEX</span>
+            <a href="#home" class="hero-rail-item active"><span>00</span></a>
+            <a href="#about" class="hero-rail-item"><span>01</span></a>
+            <a href="#projects" class="hero-rail-item"><span>02</span></a>
+            <a href="#contact" class="hero-rail-item"><span>03</span></a>
+        </aside>
+
         <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">Colin Haluska</h1>
-                <p class="hero-subtitle">Finance & Business Professional | Muhlenberg College | Class of 2027</p>
+            <div class="hero-content hero-intro">
+                <p class="hero-kicker">
+                    <span class="hero-kicker-name">Colin Haluska</span>
+                    <span class="hero-kicker-sep">/</span>
+                    <span>Finance Terminal · V26</span>
+                </p>
+
+                <h1 class="hero-headline">
+                    <span class="hero-line"><span class="hero-strong">FINANCE</span> <em>systems,</em></span>
+                    <span class="hero-line"><span class="hero-strong">QUIETLY</span> <em>engineered.</em></span>
+                </h1>
+
+                <p class="hero-bio">
+                    Annuity operations intern at SFG Annuity Advisors. I build automation, Azure document intelligence, and applied fintech tools —
+                    <em>still sharpening the ops craft</em> while shipping real systems.
+                </p>
+
+                <p class="hero-pill">
+                    Open to roles · Annuity Ops / Fintech / AI · Aberdeen, NJ · Muhlenberg ’27
+                </p>
+
                 <div class="hero-buttons">
-                    <a href="#about" class="cta-button cta-primary">Learn More</a>
-                    <a href="#projects" class="cta-button cta-secondary">View My Projects</a>
-                    <a href="#contact" class="cta-button cta-secondary">Contact</a>
+                    <a href="#projects" class="cta-button cta-primary">
+                        <span class="cta-play" aria-hidden="true"></span>
+                        See the Work
+                    </a>
+                    <a href="assets/Colin-Haluska-Resume-August-2026.pdf" target="_blank" rel="noopener noreferrer" class="cta-button cta-secondary">Résumé.pdf</a>
+                    <a href="#contact" class="cta-button cta-ghost">Start a Thread</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="assets/headshot.png" alt="Colin Haluska headshot" class="about-img">
-                    <div class="about-additional-image">
-                        <img src="assets/about-image.jpeg" alt="Colin Haluska" class="about-additional-img">
+    <!-- Profile / About Section -->
+    <section id="about" class="section profile-section">
+        <div class="container profile-shell">
+            <aside class="profile-rail" aria-label="Section index">
+                <a href="#home" class="rail-item" data-rail="00"><span>00</span></a>
+                <a href="#about" class="rail-item active" data-rail="01"><span>01</span><em>PROFILE</em></a>
+                <a href="#projects" class="rail-item" data-rail="02"><span>02</span></a>
+                <a href="#contact" class="rail-item" data-rail="03"><span>03</span></a>
+            </aside>
+
+            <div class="profile-main">
+                <header class="profile-header">
+                    <h2 class="profile-title">Profile</h2>
+                </header>
+
+                <div class="profile-layout">
+                    <div class="profile-media">
+                        <figure class="profile-portrait">
+                            <img src="assets/profile-headshot.png" alt="Colin Haluska professional headshot">
+                        </figure>
                     </div>
-                </div>
-                <div class="about-main">
-                    <p class="about-summary">
-                        I'm a finance and business double major graduating in 2027, with a strong interest in financial operations and strategic business analysis. I have accepted an offer and am anticipating to work as an annuity operations intern, where I will build a solid foundation in financial principles and develop a detail-oriented, disciplined approach to my work. Alongside my academic and professional interests, I also enjoy coding and AI, which I explore through hands-on projects, including building this website.
-                    </p>
-                    <div class="about-tabs">
-                        <div class="tab-buttons" role="tablist" aria-label="About section tabs">
-                            <button class="tab-button active" data-tab="skills" role="tab" aria-selected="true" aria-controls="tab-skills" id="tab-button-skills">Skills</button>
-                            <button class="tab-button" data-tab="experience" role="tab" aria-selected="false" aria-controls="tab-experience" id="tab-button-experience">Experience</button>
-                            <button class="tab-button" data-tab="education" role="tab" aria-selected="false" aria-controls="tab-education" id="tab-button-education">Education</button>
-                            <button class="tab-button" data-tab="certifications" role="tab" aria-selected="false" aria-controls="tab-certifications" id="tab-button-certifications">Certifications</button>
+
+                    <div class="profile-body">
+                        <p class="profile-lede">
+                            Business Administration and Finance major at Muhlenberg College (Class of <span class="accent">2027</span>). Currently an <span class="accent">Annuity Operations Intern at SFG Annuity Advisors</span>, building internal automation, Azure document intelligence, and insurance-ops tooling while shipping applied fintech projects.
+                        </p>
+                        <p class="profile-tech">
+                            Stack &amp; tools // Python · FastAPI · SQLAlchemy · SQLite · Next.js · React · TypeScript · Azure Blob Storage · Azure AI Document Intelligence · Bloomberg Terminal · Excel · JWT · Vercel
+                        </p>
+
+                        <div class="profile-stats" aria-label="Key profile metrics">
+                            <div class="stat-card">
+                                <div class="stat-value">2027<span class="stat-unit">yr</span></div>
+                                <div class="stat-label">expected graduation — muhlenberg</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">Jun<span class="stat-unit">26</span></div>
+                                <div class="stat-label">sfg annuity ops intern — present</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">10+<span class="stat-unit">forms</span></div>
+                                <div class="stat-label">application checker validation categories</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">2<span class="stat-unit">certs</span></div>
+                                <div class="stat-label">bloomberg finance credentials</div>
+                            </div>
                         </div>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab-skills" role="tabpanel" aria-labelledby="tab-button-skills">
-                                <h3>Skills</h3>
-                                <div class="skills-grid">
-                                    <div class="skill-category">
-                                        <h4>Financial & Market Tools</h4>
-                                        <p>Bloomberg Terminal (introductory proficiency)</p>
-                                    </div>
-                                    <div class="skill-category">
-                                        <h4>Analytical</h4>
-                                        <p>Data analysis fundamentals, process improvement, attention to detail</p>
-                                    </div>
-                                    <div class="skill-category">
-                                        <h4>Business & Productivity</h4>
-                                        <p>Microsoft Excel, Word, PowerPoint</p>
-                                    </div>
-                                    <div class="skill-category">
-                                        <h4>Web & Technical</h4>
-                                        <p>HTML, CSS, JavaScript; responsive website development</p>
-                                    </div>
-                                </div>
+
+                        <div class="about-tabs profile-tabs">
+                            <div class="tab-buttons" role="tablist" aria-label="Profile detail tabs">
+                                <button class="tab-button active" data-tab="experience" role="tab" aria-selected="true" aria-controls="tab-experience" id="tab-button-experience">Experience</button>
+                                <button class="tab-button" data-tab="skills" role="tab" aria-selected="false" aria-controls="tab-skills" id="tab-button-skills">Skills</button>
+                                <button class="tab-button" data-tab="certifications" role="tab" aria-selected="false" aria-controls="tab-certifications" id="tab-button-certifications">Certs</button>
+                                <button class="tab-button" data-tab="education" role="tab" aria-selected="false" aria-controls="tab-education" id="tab-button-education">Education</button>
                             </div>
-                            <div class="tab-pane" id="tab-experience" role="tabpanel" aria-labelledby="tab-button-experience">
-                                <div class="experience-timeline">
-                                    <div class="experience-item">
-                                        <div class="experience-marker">
-                                            <div class="experience-circle"></div>
-                                            <div class="experience-line"></div>
-                                        </div>
-                                        <div class="experience-content">
-                                            <h3 class="experience-title">Annuity Operations Intern</h3>
-                                            <p class="experience-company">Financial Services Company | Incoming Position</p>
-                                            <div class="experience-date-badge">Incoming Position</div>
-                                            <p class="experience-description">
-                                                I expect to join the annuity operations team, where I will apply my academic background in finance and business to day-to-day financial services operations. The role provides hands-on exposure to annuity servicing, client communication, and operational workflows within a regulated financial environment.
-                                            </p>
-                                            <div class="experience-role-focus">
-                                                <h4>Role Focus (Incoming):</h4>
-                                                <ul class="experience-list">
-                                                    <li>Support annuity operations by handling inbound calls and coordinating communication with insurance companies, CFAs, and CFPs</li>
-                                                    <li>Assist with transaction processing, documentation, and general operational paperwork related to annuity servicing</li>
-                                                    <li>Participate in internal meetings to gain exposure to workflow coordination, client servicing, and operational decision-making</li>
-                                                    <li>Support internal teams with basic reporting, data organization, and administrative tasks tied to business operations</li>
-                                                    <li>Gain hands-on exposure to financial services operations, annuity products, and day-to-day industry practices</li>
-                                                </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab-experience" role="tabpanel" aria-labelledby="tab-button-experience">
+                                    <div class="experience-timeline">
+                                        <div class="experience-item">
+                                            <div class="experience-marker">
+                                                <div class="experience-circle"></div>
+                                                <div class="experience-line"></div>
+                                            </div>
+                                            <div class="experience-content">
+                                                <div class="experience-heading-row">
+                                                    <h3 class="experience-title">Annuity Operations Intern <span class="experience-at">@ SFG Annuity Advisors</span></h3>
+                                                    <span class="experience-when">JUN '26 – PRESENT</span>
+                                                </div>
+                                                <p class="experience-company">Brielle, NJ</p>
+                                                <div class="experience-date-badge">Current Role</div>
+                                                <p class="experience-description">
+                                                    Building internal tools that automate annuity application review, carrier reference workflows, and multi-platform content production for operations and sales teams.
+                                                </p>
+                                                <div class="experience-role-focus">
+                                                    <h4>Selected Impact:</h4>
+                                                    <ul class="experience-list">
+                                                        <li>Designed and developed the <span class="accent">SFG Application Checker</span>, a full-stack internal app automating annuity packet review across compliance forms, signatures, and regulatory documents for multiple carriers</li>
+                                                        <li>Built an Azure-integrated document intelligence pipeline with <span class="accent">Azure Blob Storage</span> and <span class="accent">Azure AI Document Intelligence (OCR)</span> to classify pages, detect NIGO conditions, and generate structured review reports</li>
+                                                        <li>Engineered a rule-based validation engine covering <span class="accent">10+</span> required form categories including Financial Needs Analysis, Transfer Forms, and Replacement Notices</li>
+                                                        <li>Consolidated two operational Word manuals — a <span class="accent">22-carrier</span> reference library and <span class="accent">9-carrier</span> wire-transfer directory — into one searchable offline HTML tool for staff</li>
+                                                        <li>Parsed DOCX XML containing <span class="accent">204</span> paragraphs and <span class="accent">222</span> tables into a branded, email-shareable single-file app with zero external dependencies</li>
+                                                        <li>Designed an AI content pipeline for Annuity Sales Center supporting <span class="accent">100–365+</span> days of scheduled posts across LinkedIn, Instagram, Facebook, and TikTok</li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tab-education" role="tabpanel" aria-labelledby="tab-button-education">
-                                <div class="education-timeline">
-                                    <div class="education-item">
-                                        <div class="education-marker">
-                                            <div class="education-circle"></div>
-                                            <div class="education-line"></div>
-                                        </div>
-                                        <div class="education-content">
-                                            <h3 class="education-school">Muhlenberg College</h3>
-                                            <p class="education-dates">2023 – 2027 (Expected)</p>
-                                            <p class="education-degree">Bachelor of Science in Finance & Business</p>
-                                            
-                                            <div class="coursework-section">
-                                                <h4>Relevant Coursework</h4>
-                                                
-                                                <div class="coursework-category">
-                                                    <h5>Business</h5>
-                                                    <ul class="course-list">
-                                                        <li>AI in Business: Applications & Strategy (BUS 288)</li>
-                                                        <li>Business and Society (BUS 101)</li>
-                                                        <li>Management (BUS 236)</li>
-                                                        <li>Marketing (BUS 239)</li>
-                                                        <li>Project Management Theory & Practice (BUS 385)</li>
-                                                    </ul>
+
+                                        <div class="experience-item">
+                                            <div class="experience-marker">
+                                                <div class="experience-circle"></div>
+                                                <div class="experience-line"></div>
+                                            </div>
+                                            <div class="experience-content">
+                                                <div class="experience-heading-row">
+                                                    <h3 class="experience-title">Founder &amp; Head Trainer <span class="experience-at">@ Haluska Hoops</span></h3>
+                                                    <span class="experience-when">JUN '26 – PRESENT</span>
                                                 </div>
-                                                
-                                                <div class="coursework-category">
-                                                    <h5>Finance</h5>
-                                                    <ul class="course-list">
-                                                        <li>Corporate Finance (FIN 237)</li>
-                                                        <li>Math for Financial Analysis (FIN 311)</li>
-                                                        <li>Money, Banking, and Financial Markets (FIN 330)</li>
-                                                    </ul>
-                                                </div>
-                                                
-                                                <div class="coursework-category">
-                                                    <h5>Economics</h5>
-                                                    <ul class="course-list">
-                                                        <li>Microeconomics (ECN 101)</li>
-                                                        <li>Macroeconomics (ECN 102)</li>
-                                                    </ul>
-                                                </div>
-                                                
-                                                <div class="coursework-category">
-                                                    <h5>Mathematics & Analytics</h5>
-                                                    <ul class="course-list">
-                                                        <li>Calculus (MTH 121)</li>
-                                                        <li>Statistical Analysis (MTH 119)</li>
-                                                        <li>Financial Accounting (ACT 101)</li>
+                                                <p class="experience-company">Matawan, NJ</p>
+                                                <div class="experience-role-focus">
+                                                    <ul class="experience-list">
+                                                        <li>Founded a basketball training business generating <span class="accent">$8,000+</span> in revenue across an <span class="accent">18+</span> client base through structured social marketing driving <span class="accent">150,000+</span> organic views</li>
+                                                        <li>Built business infrastructure including pricing, scheduling, and session workflows for a growing roster of youth and high school athletes</li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane" id="tab-certifications" role="tabpanel" aria-labelledby="tab-button-certifications">
-                                <div class="certifications-grid">
-                                    <div class="certification-card">
-                                        <div class="cert-logo bloomberg-logo">
-                                            <span class="bloomberg-b">B</span>
+                                <div class="tab-pane" id="tab-skills" role="tabpanel" aria-labelledby="tab-button-skills">
+                                    <div class="skills-grid">
+                                        <div class="skill-category">
+                                            <h4>Financial</h4>
+                                            <p>Bloomberg Terminal, Portfolio Analysis, Equity Research, Financial Markets, Annuity Operations, Insurance Technology</p>
                                         </div>
-                                        <h3 class="cert-name">Bloomberg Finance Fundamentals</h3>
-                                        <p class="cert-issuer">Bloomberg</p>
-                                        <p class="cert-date">Issued Dec 2024</p>
-                                        <p class="cert-id">Credential ID: q4tVzU1zVcahAK8TYicGfvEm</p>
-                                        <div class="cert-skills">
-                                            <span>Portfolio Management</span>
-                                            <span>Stock Exchange</span>
-                                            <span>Financial Analysis</span>
+                                        <div class="skill-category">
+                                            <h4>Technical</h4>
+                                            <p>Python, FastAPI, SQLAlchemy, SQLite, Next.js, React, TypeScript, HTML/CSS/JS, REST APIs, JWT, Azure Blob Storage, Azure AI Document Intelligence, Vercel, GitHub</p>
+                                        </div>
+                                        <div class="skill-category">
+                                            <h4>Business / Analytical</h4>
+                                            <p>Microsoft Excel, Data Analysis, Stakeholder Management, Operations Planning, Project Management, Marketing Operations, Content Strategy</p>
+                                        </div>
+                                        <div class="skill-category">
+                                            <h4>AI &amp; Automation</h4>
+                                            <p>Prompt Engineering, AI Workflow Design, Claude, ChatGPT, Cursor AI, Buffer</p>
                                         </div>
                                     </div>
-                                    <div class="certification-card">
-                                        <div class="cert-logo bloomberg-logo">
-                                            <span class="bloomberg-b">B</span>
+                                </div>
+                                <div class="tab-pane" id="tab-certifications" role="tabpanel" aria-labelledby="tab-button-certifications">
+                                    <div class="certifications-grid">
+                                        <div class="certification-card">
+                                            <div class="cert-logo bloomberg-logo">
+                                                <span class="bloomberg-b">B</span>
+                                            </div>
+                                            <h3 class="cert-name">Bloomberg Finance Fundamentals</h3>
+                                            <p class="cert-issuer">Bloomberg</p>
+                                            <p class="cert-date">Issued Dec 2024</p>
+                                            <p class="cert-id">Credential ID: q4tVzU1zVcahAK8TYicGfvEm</p>
+                                            <div class="cert-skills">
+                                                <span>Portfolio Management</span>
+                                                <span>Stock Exchange</span>
+                                                <span>Financial Analysis</span>
+                                            </div>
                                         </div>
-                                        <h3 class="cert-name">Bloomberg Market Concepts</h3>
-                                        <p class="cert-issuer">Bloomberg</p>
-                                        <p class="cert-date">Issued Dec 2024</p>
-                                        <p class="cert-id">Credential ID: 1UFW2xK2YmkE1ca3EGpJBkPB</p>
-                                        <div class="cert-skills">
-                                            <span>Market Concepts</span>
-                                            <span>Financial Markets</span>
-                                            <span>Investment Analysis</span>
+                                        <div class="certification-card">
+                                            <div class="cert-logo bloomberg-logo">
+                                                <span class="bloomberg-b">B</span>
+                                            </div>
+                                            <h3 class="cert-name">Bloomberg Market Concepts</h3>
+                                            <p class="cert-issuer">Bloomberg</p>
+                                            <p class="cert-date">Issued Dec 2024</p>
+                                            <p class="cert-id">Credential ID: 1UFW2xK2YmkE1ca3EGpJBkPB</p>
+                                            <div class="cert-skills">
+                                                <span>Market Concepts</span>
+                                                <span>Financial Markets</span>
+                                                <span>Investment Analysis</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab-education" role="tabpanel" aria-labelledby="tab-button-education">
+                                    <div class="education-timeline">
+                                        <div class="education-item">
+                                            <div class="education-marker">
+                                                <div class="education-circle"></div>
+                                                <div class="education-line"></div>
+                                            </div>
+                                            <div class="education-content">
+                                                <h3 class="education-school">Muhlenberg College</h3>
+                                                <p class="education-dates">Allentown, PA · Class of 2027</p>
+                                                <p class="education-degree">Majors: Business Administration and Finance</p>
+                                                <p class="education-degree">GPA: Business 3.444 · Finance 3.222</p>
+                                                <div class="coursework-section">
+                                                    <h4>Leadership &amp; Activities</h4>
+                                                    <div class="coursework-category">
+                                                        <h5>Leadership</h5>
+                                                        <ul class="course-list">
+                                                            <li>Alpha Tau Omega — Head of Philanthropy (Spring 2026 – Present)</li>
+                                                            <li>Muhlenberg College Intramural Basketball — Commissioner (Feb 2026 – Present); 160+ participants, 60+ games, secured referee funding, launched league Instagram</li>
+                                                            <li>Investment Society — Member Analyst (Oct 2023 – Present); equity analysis for a student-managed $1M fund</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="coursework-category">
+                                                        <h5>Athletics</h5>
+                                                        <ul class="course-list">
+                                                            <li>Muhlenberg College Men’s Basketball Program — Varsity Athlete (2023 – 2025)</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="coursework-category">
+                                                        <h5>Selected Coursework</h5>
+                                                        <ul class="course-list">
+                                                            <li>Corporate Finance (FIN 237)</li>
+                                                            <li>Math for Financial Analysis (FIN 311)</li>
+                                                            <li>Money, Banking, and Financial Markets (FIN 330)</li>
+                                                            <li>AI in Business: Applications &amp; Strategy (BUS 288)</li>
+                                                            <li>Project Management Theory &amp; Practice (BUS 385)</li>
+                                                            <li>Statistical Analysis (MTH 119)</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -238,7 +349,7 @@
                     <button class="project-tab-button active" data-project-tab="all" role="tab" aria-selected="true" aria-controls="project-tab-all" id="project-tab-button-all">All</button>
                     <button class="project-tab-button" data-project-tab="website" role="tab" aria-selected="false" aria-controls="project-tab-website" id="project-tab-button-website">Website Development</button>
                     <button class="project-tab-button" data-project-tab="fintech" role="tab" aria-selected="false" aria-controls="project-tab-fintech" id="project-tab-button-fintech">Fintech Projects</button>
-                    <button class="project-tab-button" data-project-tab="upcoming" role="tab" aria-selected="false" aria-controls="project-tab-upcoming" id="project-tab-button-upcoming">Upcoming Projects</button>
+                    <button class="project-tab-button" data-project-tab="internal" role="tab" aria-selected="false" aria-controls="project-tab-internal" id="project-tab-button-internal">Internal Tools</button>
                 </div>
                 <div class="projects-content">
                     <div class="project-tab-pane active" id="project-tab-all" role="tabpanel" aria-labelledby="project-tab-button-all">
@@ -292,20 +403,25 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="project-card temple-certificate-card" data-category="upcoming">
-                                <div class="temple-logo-overlay"></div>
-                                <h3>Temple University Data Analytics & AI Certificate (10-Week Program)</h3>
-                                <p class="project-context">Upcoming</p>
-                                <p>A 10-week intensive certificate program focused on applied data analytics and artificial intelligence, emphasizing hands-on projects, real-world datasets, and practical applications for business and financial decision-making.</p>
+                            <div class="project-card sfg-checker-card" data-category="internal">
+                                <h3>SFG Application Checker</h3>
+                                <p class="project-subtitle">Internal Annuity Packet Review Automation</p>
+                                <p class="project-summary">Full-stack internal web application built for SFG Annuity Advisors that automates annuity application packet review—classifying documents, detecting Not In Good Order (NIGO) conditions, and validating required forms across multiple insurance carriers before submission.</p>
                                 <div class="project-tools">
-                                    <span>Python for data analysis</span>
-                                    <span>SQL and databases</span>
-                                    <span>Machine learning fundamentals</span>
-                                    <span>Data visualization</span>
-                                    <span>Applied AI use cases</span>
+                                    <span>Full-stack web app</span>
+                                    <span>Azure Blob Storage</span>
+                                    <span>Azure AI Document Intelligence</span>
+                                    <span>OCR pipeline</span>
+                                    <span>Rule-based validation</span>
+                                    <span>NIGO detection</span>
                                 </div>
                                 <div class="project-outcome">
-                                    <strong>Outcome:</strong> Professional certification with applied project work.
+                                    <strong>Access:</strong> Internal use only — not publicly available.
+                                </div>
+                                <div class="project-actions">
+                                    <button class="project-link-button" disabled>
+                                        <span>Internal Use Only</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -367,22 +483,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="project-tab-pane" id="project-tab-upcoming" role="tabpanel" aria-labelledby="project-tab-button-upcoming">
+                    <div class="project-tab-pane" id="project-tab-internal" role="tabpanel" aria-labelledby="project-tab-button-internal">
                         <div class="projects-grid">
-                            <div class="project-card temple-certificate-card" data-category="upcoming">
-                                <div class="temple-logo-overlay"></div>
-                                <h3>Temple University Data Analytics & AI Certificate (10-Week Program)</h3>
-                                <p class="project-context">Upcoming</p>
-                                <p>A 10-week intensive certificate program focused on applied data analytics and artificial intelligence, emphasizing hands-on projects, real-world datasets, and practical applications for business and financial decision-making.</p>
+                            <div class="project-card sfg-checker-card" data-category="internal">
+                                <h3>SFG Application Checker</h3>
+                                <p class="project-subtitle">Internal Annuity Packet Review Automation</p>
+                                <p class="project-summary">Full-stack internal web application built for SFG Annuity Advisors that automates annuity application packet review—classifying documents, detecting Not In Good Order (NIGO) conditions, and validating required forms across multiple insurance carriers before submission.</p>
                                 <div class="project-tools">
-                                    <span>Python for data analysis</span>
-                                    <span>SQL and databases</span>
-                                    <span>Machine learning fundamentals</span>
-                                    <span>Data visualization</span>
-                                    <span>Applied AI use cases</span>
+                                    <span>Full-stack web app</span>
+                                    <span>Azure Blob Storage</span>
+                                    <span>Azure AI Document Intelligence</span>
+                                    <span>OCR pipeline</span>
+                                    <span>Rule-based validation</span>
+                                    <span>NIGO detection</span>
                                 </div>
                                 <div class="project-outcome">
-                                    <strong>Outcome:</strong> Professional certification with applied project work.
+                                    <strong>Access:</strong> Internal use only — not publicly available.
+                                </div>
+                                <div class="project-actions">
+                                    <button class="project-link-button" disabled>
+                                        <span>Internal Use Only</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -430,7 +551,7 @@
                         </div>
                         <div class="contact-card-content">
                             <h4>Location</h4>
-                            <p>New Jersey, USA</p>
+                            <p>Aberdeen, NJ</p>
                         </div>
                     </div>
                     <div class="contact-social">
@@ -445,7 +566,7 @@
                                 <polyline points="22,6 12,13 2,6"></polyline>
                             </svg>
                         </a>
-                        <a href="assets/Colin-Haluska-Resume-Summer-2026.pdf" target="_blank" rel="noopener noreferrer" class="social-link resume-link" id="download-resume" aria-label="View Resume">
+                        <a href="assets/Colin-Haluska-Resume-August-2026.pdf" target="_blank" rel="noopener noreferrer" class="social-link resume-link" id="download-resume" aria-label="View Resume">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                                 <polyline points="14 2 14 8 20 8"></polyline>
