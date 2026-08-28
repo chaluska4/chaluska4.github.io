@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Colin Haluska</title>
+    <meta name="description" content="Website development projects for real businesses — Haluska Hoops, Colin Haluska Investments, and internal financial services platforms.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="alternate icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="page-services">
+    <a href="#services-main" class="skip-link">Skip to main content</a>
+
+    <div id="ambient-bg" class="ambient-bg" aria-hidden="true">
+        <div class="ambient-grid"></div>
+        <div class="ambient-glow ambient-glow-a"></div>
+        <div class="ambient-glow ambient-glow-b"></div>
+        <div class="ambient-glow ambient-glow-c"></div>
+        <div class="ambient-orb ambient-orb-blue-1"></div>
+        <div class="ambient-orb ambient-orb-blue-2"></div>
+        <div class="ambient-orb ambient-orb-blue-3"></div>
+        <div class="ambient-orb ambient-orb-orange-1"></div>
+        <div class="ambient-orb ambient-orb-orange-2"></div>
+        <div class="ambient-orb ambient-orb-orange-3"></div>
+        <div class="ambient-scan"></div>
+        <div class="ambient-stream ambient-stream-1"></div>
+        <div class="ambient-stream ambient-stream-2"></div>
+        <div class="ambient-stream ambient-stream-3"></div>
+        <div class="ambient-chart"></div>
+        <canvas id="ambient-canvas" class="ambient-canvas"></canvas>
+    </div>
+
+    <div class="status-bar" aria-label="Profile status">
+        <div class="status-bar-inner">
+            <div class="status-left">
+                <span>/ COLIN_HALUSKA /</span>
+                <span class="status-muted">SERVICES.V26</span>
+            </div>
+            <div class="status-right">
+                <span class="status-item"><i class="status-dot"></i>STATUS <strong>OPEN TO WORK</strong></span>
+                <span class="status-item"><i class="status-dot"></i>FOCUS <strong>WEB · FINTECH · ADVISORS</strong></span>
+                <span class="status-item"><i class="status-dot"></i>BASE <strong>MONMOUTH COUNTY, NJ</strong></span>
+                <span class="status-item status-clock" id="status-clock">UTC --:--:--</span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../" class="logo-link" aria-label="Colin Haluska - Home">
+                    <div class="logo-square">
+                        <span class="logo-monogram">CH</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu" id="nav-menu" role="menubar">
+                <li class="nav-item" role="none">
+                    <a href="../" class="nav-link" role="menuitem">Home</a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="../#about" class="nav-link" role="menuitem">Profile</a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="./" class="nav-link active" role="menuitem" aria-current="page">Services</a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="../#projects" class="nav-link" role="menuitem">Projects</a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="../#contact" class="nav-link" role="menuitem">Contact</a>
+                </li>
+            </ul>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="services-main" class="services-page">
+        <section class="section services-page-hero" aria-labelledby="services-page-title">
+            <div class="container">
+                <p class="services-back">
+                    <a href="../" class="services-back-link" aria-label="Return to main portfolio">← Back to portfolio</a>
+                </p>
+                <header class="services-header services-page-header">
+                    <p class="services-eyebrow">WEBSITE DEVELOPMENT</p>
+                    <h1 class="services-headline" id="services-page-title">Websites Built for Real Business Needs</h1>
+                    <p class="services-intro">
+                        I design and develop modern websites that help businesses present their services professionally, simplify important processes, and create better digital experiences for their audiences.
+                    </p>
+                </header>
+            </div>
+        </section>
+
+        <section class="section section-alt services-work-section" aria-labelledby="featured-work-title">
+            <div class="services-work-shell">
+                <div class="services-work-heading">
+                    <p class="services-eyebrow">FEATURED WORK</p>
+                    <h2 class="services-work-title" id="featured-work-title">Selected Work</h2>
+                </div>
+                <div id="services-work" class="services-work"></div>
+            </div>
+        </section>
+
+        <section class="section services-matter-section" aria-labelledby="matter-title">
+            <div class="container">
+                <div class="services-matter">
+                    <h2 class="services-matter-title" id="matter-title">More Than a Website Template</h2>
+                    <p class="services-matter-copy">
+                        Each project began with a different business problem. Haluska Hoops required a clear public-facing website for attracting training clients. Colin Haluska Investments required secure full-stack architecture and complex financial functionality. The SFG Resource Hub required an organized internal platform built around real operational needs. Together, these projects demonstrate my ability to understand the purpose behind a website and build around the people who will actually use it.
+                    </p>
+                    <ul class="services-capability-list" aria-label="Core capabilities">
+                        <li>Business-Focused Design</li>
+                        <li>Responsive Development</li>
+                        <li>Full-Stack Functionality</li>
+                        <li>Deployment &amp; Ongoing Support</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt services-final-cta" aria-labelledby="services-cta-title">
+            <div class="container">
+                <div class="services-final-cta-inner">
+                    <h2 class="services-final-cta-title" id="services-cta-title">Ready to Get Started?</h2>
+                    <p class="services-final-cta-copy">
+                        Whether you need a professional business website, a focused landing page, or a custom digital platform, I can help turn your goals into a polished and functional online experience.
+                    </p>
+                    <a href="../#contact" class="cta-button cta-primary" aria-label="Get in contact via the portfolio contact section">Get In Contact</a>
+                    <p class="services-final-cta-note">Based in Monmouth County and available to work with businesses and financial professionals throughout New Jersey.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Colin Haluska. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="projects-data.js"></script>
+    <script src="services-page.js"></script>
+</body>
+</html>

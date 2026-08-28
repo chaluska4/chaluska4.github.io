@@ -76,27 +76,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Active navigation link highlighting
 const sections = document.querySelectorAll('.section, .hero');
 const navItems = document.querySelectorAll('.nav-link');
+const isServicesPage = /\/services\/?$/.test(window.location.pathname.replace(/index\.html$/, ''));
 
-window.addEventListener('scroll', () => {
-    let current = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (window.pageYOffset >= sectionTop - 100) {
-            current = section.getAttribute('id');
-        }
-    });
-    
+if (isServicesPage) {
     navItems.forEach(item => {
-        item.classList.remove('active');
-        const href = item.getAttribute('href');
-        if (href === `#${current}` || (current === '' && href === '#home')) {
-            item.classList.add('active');
+        const href = item.getAttribute('href') || '';
+        const isServicesLink = href === './' || href.endsWith('/services/') || href.endsWith('/services') || href === 'services/';
+        item.classList.toggle('active', isServicesLink);
+        if (isServicesLink) {
+            item.setAttribute('aria-current', 'page');
+        } else {
+            item.removeAttribute('aria-current');
         }
     });
-});
+} else {
+    window.addEventListener('scroll', () => {
+        let current = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+
+            if (window.pageYOffset >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            const href = item.getAttribute('href');
+            if (href === `#${current}` || (current === '' && href === '#home')) {
+                item.classList.add('active');
+            }
+        });
+    });
+}
 
 // Tab functionality for About section
 const tabButtons = document.querySelectorAll('.tab-button');
@@ -210,7 +223,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe sections for fade-in animation
-document.querySelectorAll('.section, .timeline-item, .competency-card, .project-card').forEach(el => {
+document.querySelectorAll('.section, .timeline-item, .competency-card, .project-card, .service-card').forEach(el => {
     if (prefersReducedMotion) {
         el.classList.add('visible');
         return;
@@ -360,8 +373,9 @@ if (contactForm) {
     const map = [
         { id: 'home', el: items[0] },
         { id: 'about', el: items[1] },
-        { id: 'projects', el: items[2] },
-        { id: 'contact', el: items[3] }
+        { id: 'services', el: items[2] },
+        { id: 'projects', el: items[3] },
+        { id: 'contact', el: items[4] }
     ];
 
     const sync = () => {
