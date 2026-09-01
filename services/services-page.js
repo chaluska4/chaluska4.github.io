@@ -232,3 +232,183 @@
 
     sync();
 })();
+
+(function initServicesValueCarousel() {
+    const section = document.querySelector('.services-value-section');
+    if (!section) return;
+
+    const benefits = [
+        { title: 'Credibility', copy: 'Look established and trustworthy before the first conversation.' },
+        { title: 'Clear Positioning', copy: 'Show who you serve, what you solve, and why to choose you.' },
+        { title: 'More Appointments', copy: 'Forms and CTAs that turn interest into booked consultations.' },
+        { title: 'Better Advertising', copy: 'Give ads, emails, and posts a professional place to land.' },
+        { title: 'Seminar Support', copy: 'Event pages for details, registration, and follow-up.' },
+        { title: 'Centralized Information', copy: 'Bio, services, credentials, and contact in one place.' },
+        { title: 'Lead Tracking', copy: 'See which visits and campaigns become real inquiries.' },
+        { title: 'Local Visibility', copy: 'Help nearby prospects find you when they search.' },
+        { title: 'Brand Control', copy: 'Own your online presentation—not just a directory listing.' },
+        { title: 'Long-Term Asset', copy: 'A site that keeps supporting referrals and campaigns.' }
+    ];
+
+    const panel = section.querySelector('.services-value-panel');
+    const titleEl = section.querySelector('[data-value-title]');
+    const copyEl = section.querySelector('[data-value-copy]');
+    const indexEl = section.querySelector('[data-value-index]');
+    const progressEl = section.querySelector('[data-value-progress]');
+    const markersRoot = section.querySelector('.services-value-markers');
+    const prevBtn = section.querySelector('.services-value-nav--prev');
+    const nextBtn = section.querySelector('.services-value-nav--next');
+    const preferReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!panel || !titleEl || !copyEl || !indexEl || !progressEl || !markersRoot || !prevBtn || !nextBtn) return;
+
+    let active = 0;
+    let swapTimer = null;
+    let autoTimer = null;
+    let isAnimating = false;
+    let hasManualNav = false;
+    const AUTO_MS_DEFAULT = 3000;
+    const AUTO_MS_AFTER_MANUAL = 6000;
+    const SLIDE_MS = 340;
+
+    markersRoot.innerHTML = benefits
+        .map(
+            (benefit, index) =>
+                `<button type="button" class="services-value-marker" data-index="${index}" aria-label="${benefit.title}">${String(index + 1).padStart(2, '0')}</button>`
+        )
+        .join('');
+
+    const markers = Array.from(markersRoot.querySelectorAll('.services-value-marker'));
+
+    const clearSlideClasses = () => {
+        panel.classList.remove(
+            'is-exiting-next',
+            'is-exiting-prev',
+            'is-entering-next',
+            'is-entering-prev',
+            'is-settling'
+        );
+    };
+
+    const applyContent = (index) => {
+        const benefit = benefits[index];
+        titleEl.textContent = benefit.title;
+        copyEl.textContent = benefit.copy;
+        indexEl.textContent = String(index + 1).padStart(2, '0');
+        progressEl.style.width = `${((index + 1) / benefits.length) * 100}%`;
+        markers.forEach((marker, i) => {
+            marker.classList.toggle('is-active', i === index);
+            marker.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        });
+    };
+
+    const render = (index, animate, dir = 1) => {
+        if (!animate || preferReducedMotion) {
+            clearSlideClasses();
+            applyContent(index);
+            isAnimating = false;
+            return;
+        }
+
+        isAnimating = true;
+        clearTimeout(swapTimer);
+        clearSlideClasses();
+        panel.classList.add(dir >= 0 ? 'is-exiting-next' : 'is-exiting-prev');
+
+        swapTimer = setTimeout(() => {
+            applyContent(index);
+            panel.classList.remove('is-exiting-next', 'is-exiting-prev');
+            panel.classList.add(dir >= 0 ? 'is-entering-next' : 'is-entering-prev');
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    panel.classList.remove('is-entering-next', 'is-entering-prev');
+                    panel.classList.add('is-settling');
+                    swapTimer = setTimeout(() => {
+                        panel.classList.remove('is-settling');
+                        isAnimating = false;
+                    }, SLIDE_MS);
+                });
+            });
+        }, SLIDE_MS);
+    };
+
+    const goTo = (index, animate = true, dir = 1) => {
+        const n = benefits.length;
+        const next = ((index % n) + n) % n;
+        if (next === active && animate) return;
+        active = next;
+        render(active, animate, dir);
+    };
+
+    const step = (dir) => {
+        if (isAnimating) return;
+        goTo(active + dir, true, dir);
+    };
+
+    const stopAuto = () => {
+        if (autoTimer) {
+            clearInterval(autoTimer);
+            autoTimer = null;
+        }
+    };
+
+    const startAuto = () => {
+        stopAuto();
+        if (preferReducedMotion) return;
+        const delay = hasManualNav ? AUTO_MS_AFTER_MANUAL : AUTO_MS_DEFAULT;
+        autoTimer = setInterval(() => step(1), delay);
+    };
+
+    const noteManualNav = () => {
+        hasManualNav = true;
+        startAuto();
+    };
+
+    prevBtn.addEventListener('click', () => {
+        step(-1);
+        noteManualNav();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        step(1);
+        noteManualNav();
+    });
+
+    markers.forEach((marker) => {
+        marker.addEventListener('click', () => {
+            const index = Number(marker.dataset.index);
+            const dir = index >= active ? 1 : -1;
+            if (isAnimating) return;
+            goTo(index, true, dir);
+            startAuto();
+        });
+    });
+
+    panel.addEventListener('mouseenter', stopAuto);
+    panel.addEventListener('mouseleave', startAuto);
+    panel.addEventListener('focusin', stopAuto);
+    panel.addEventListener('focusout', (event) => {
+        if (!panel.contains(event.relatedTarget)) startAuto();
+    });
+
+    section.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            step(-1);
+            startAuto();
+        } else if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            step(1);
+            startAuto();
+        }
+    });
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stopAuto();
+        else startAuto();
+    });
+
+    goTo(0, false, 1);
+    startAuto();
+})();

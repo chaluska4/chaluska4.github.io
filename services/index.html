@@ -85,21 +85,79 @@
 
     <main id="services-main" class="services-page">
         <section class="section services-page-hero" aria-labelledby="services-page-title">
-            <div class="container">
-                <p class="services-back">
-                    <a href="../" class="services-back-link" aria-label="Return to main portfolio">← Back to portfolio</a>
-                </p>
-                <header class="services-header services-page-header">
-                    <p class="services-eyebrow">WEBSITE DEVELOPMENT</p>
-                    <h1 class="services-headline" id="services-page-title">Websites Built for Real Business Needs</h1>
-                    <p class="services-intro">
-                        I design and develop modern websites that help businesses present their services professionally, simplify important processes, and create better digital experiences for their audiences.
+            <div class="services-hero-shell">
+                <div class="services-hero-stage" aria-hidden="true">
+                    <div class="services-hero-grid"></div>
+                    <div class="services-hero-scan"></div>
+                    <div class="services-hero-orb services-hero-orb-a"></div>
+                    <div class="services-hero-orb services-hero-orb-b"></div>
+                    <svg class="services-hero-chart" viewBox="0 0 640 180" preserveAspectRatio="none">
+                        <path class="services-hero-chart-line" d="M0 140 C80 136 110 92 180 88 C250 84 270 120 340 104 C410 88 430 48 500 42 C560 38 600 58 640 44"></path>
+                        <path class="services-hero-chart-fill" d="M0 140 C80 136 110 92 180 88 C250 84 270 120 340 104 C410 88 430 48 500 42 C560 38 600 58 640 44 V180 H0 Z"></path>
+                    </svg>
+                    <div class="services-hero-ticks">
+                        <span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+
+                <div class="services-hero-content">
+                    <p class="services-back">
+                        <a href="../" class="services-back-link" aria-label="Return to main portfolio">← Back to portfolio</a>
                     </p>
-                </header>
+                    <header class="services-header services-page-header">
+                        <p class="services-eyebrow">WEBSITE DEVELOPMENT</p>
+                        <h1 class="services-headline" id="services-page-title">
+                            <span class="services-headline-strong">Websites Built</span>
+                            <span class="services-headline-em">for Real Business Needs</span>
+                        </h1>
+                        <p class="services-intro">
+                            I design and develop modern websites that help businesses present their services professionally, simplify important processes, and create better digital experiences for their audiences.
+                        </p>
+                        <p class="services-hero-signal">
+                            <span class="services-hero-signal-dot"></span>
+                            Custom builds · Advisor-ready structure · Monmouth County, NJ
+                        </p>
+                    </header>
+
+                    <nav class="services-jump" aria-label="On this page">
+                        <a href="#featured-work" class="services-jump-card">
+                            <span class="services-jump-index">01</span>
+                            <span class="services-jump-body">
+                                <span class="services-jump-label">Featured Work</span>
+                                <span class="services-jump-hint">Selected builds</span>
+                            </span>
+                            <span class="services-jump-go" aria-hidden="true">→</span>
+                        </a>
+                        <a href="#pricing" class="services-jump-card">
+                            <span class="services-jump-index">02</span>
+                            <span class="services-jump-body">
+                                <span class="services-jump-label">Pricing</span>
+                                <span class="services-jump-hint">Packages &amp; care</span>
+                            </span>
+                            <span class="services-jump-go" aria-hidden="true">→</span>
+                        </a>
+                        <a href="#what-i-can-do" class="services-jump-card">
+                            <span class="services-jump-index">03</span>
+                            <span class="services-jump-body">
+                                <span class="services-jump-label">What I Can Do for You</span>
+                                <span class="services-jump-hint">Website benefits</span>
+                            </span>
+                            <span class="services-jump-go" aria-hidden="true">→</span>
+                        </a>
+                        <a href="#get-started" class="services-jump-card services-jump-card--accent">
+                            <span class="services-jump-index">04</span>
+                            <span class="services-jump-body">
+                                <span class="services-jump-label">Get Started</span>
+                                <span class="services-jump-hint">Start a conversation</span>
+                            </span>
+                            <span class="services-jump-go" aria-hidden="true">→</span>
+                        </a>
+                    </nav>
+                </div>
             </div>
         </section>
 
-        <section class="section section-alt services-work-section" aria-labelledby="featured-work-title">
+        <section id="featured-work" class="section section-alt services-work-section" aria-labelledby="featured-work-title">
             <div class="services-work-shell">
                 <div class="services-work-heading">
                     <p class="services-eyebrow">FEATURED WORK</p>
@@ -109,24 +167,197 @@
             </div>
         </section>
 
-        <section class="section services-matter-section" aria-labelledby="matter-title">
-            <div class="container">
-                <div class="services-matter">
-                    <h2 class="services-matter-title" id="matter-title">More Than a Website Template</h2>
-                    <p class="services-matter-copy">
-                        Each project began with a different business problem. Haluska Hoops required a clear public-facing website for attracting training clients. Colin Haluska Investments required secure full-stack architecture and complex financial functionality. The SFG Resource Hub required an organized internal platform built around real operational needs. Together, these projects demonstrate my ability to understand the purpose behind a website and build around the people who will actually use it.
+        <section id="pricing" class="section services-pricing-section" aria-labelledby="pricing-title">
+            <div class="services-pricing-shell">
+                <header class="services-pricing-intro">
+                    <p class="services-eyebrow">PRICING</p>
+                    <h2 class="services-pricing-title" id="pricing-title">Straightforward Pricing for a Stronger Online Presence</h2>
+                    <p class="services-pricing-copy">
+                        Every project is tailored to the advisor’s goals, brand, content, and firm-review process. These packages provide a clear starting point; final scope is confirmed before work begins.
                     </p>
-                    <ul class="services-capability-list" aria-label="Core capabilities">
-                        <li>Business-Focused Design</li>
-                        <li>Responsive Development</li>
-                        <li>Full-Stack Functionality</li>
-                        <li>Deployment &amp; Ongoing Support</li>
-                    </ul>
+                </header>
+
+                <div class="services-pricing-cards">
+                    <article class="services-price-card">
+                        <p class="services-price-card-label">ESSENTIAL WEBSITE</p>
+                        <p class="services-price-card-tagline">A polished, professional website built from a proven structure for advisors who need a credible digital presence.</p>
+                        <div class="services-price-card-amount">
+                            <span class="services-price-card-value">$699</span>
+                            <span class="services-price-card-cadence">one-time setup</span>
+                        </div>
+                        <p class="services-price-card-care">Optional Website Care — $50/month</p>
+                        <ul class="services-price-card-includes">
+                            <li>Proven professional website framework</li>
+                            <li>Standard core website structure</li>
+                            <li>Mobile-responsive design</li>
+                            <li>Contact form or appointment scheduling integration</li>
+                            <li>Basic search metadata setup</li>
+                            <li>Domain and launch assistance</li>
+                            <li>One organized revision round</li>
+                            <li>Website prepared for firm review</li>
+                        </ul>
+                    </article>
+
+                    <article class="services-price-card services-price-card--featured">
+                        <p class="services-price-card-badge">MOST POPULAR</p>
+                        <p class="services-price-card-label">PROFESSIONAL WEBSITE</p>
+                        <p class="services-price-card-tagline">A more customized website built around the advisor’s brand, marketing activity, and client-conversion goals.</p>
+                        <div class="services-price-card-amount">
+                            <span class="services-price-card-value">$1,550</span>
+                            <span class="services-price-card-cadence">one-time setup</span>
+                        </div>
+                        <p class="services-price-card-care">Optional Growth Care — $100/month</p>
+                        <ul class="services-price-card-includes">
+                            <li>Customized website structure and visual direction</li>
+                            <li>Mobile-responsive design</li>
+                            <li>Multiple conversion paths and calls to action</li>
+                            <li>Contact form and appointment scheduling integration</li>
+                            <li>One seminar or campaign landing page</li>
+                            <li>Basic search metadata and analytics setup</li>
+                            <li>Domain and launch assistance</li>
+                            <li>Two organized revision rounds</li>
+                            <li>One firm-review revision round</li>
+                            <li>Website prepared for firm review</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="services-pricing-compare">
+                    <h3 class="services-pricing-compare-title">Package Comparison</h3>
+                    <div class="services-pricing-table-wrap" role="region" aria-label="Pricing package comparison" tabindex="0">
+                        <table class="services-pricing-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Feature</th>
+                                    <th scope="col">Essential</th>
+                                    <th scope="col">Professional</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Website structure</th>
+                                    <td>Standard core website structure</td>
+                                    <td>Customized structure built around the advisor’s services and marketing goals</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Design customization</th>
+                                    <td>Proven framework adapted to the advisor’s branding</td>
+                                    <td>Custom visual direction and more tailored design</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Mobile-responsive design</th>
+                                    <td>Included</td>
+                                    <td>Included</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Contact and scheduling integration</th>
+                                    <td>Included</td>
+                                    <td>Included</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Conversion paths and calls to action</th>
+                                    <td>One primary contact or scheduling path</td>
+                                    <td>Multiple conversion paths built around client goals</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Search metadata setup</th>
+                                    <td>Included</td>
+                                    <td>Included</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Analytics setup</th>
+                                    <td>Not included</td>
+                                    <td>Basic analytics setup included</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Seminar or campaign landing page</th>
+                                    <td>Quoted separately</td>
+                                    <td>One included</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Revision rounds</th>
+                                    <td>One organized round</td>
+                                    <td>Two organized rounds</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Firm-review revision round</th>
+                                    <td>Quoted separately if required</td>
+                                    <td>One included</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Monthly content-update time</th>
+                                    <td>Up to 30 minutes with Website Care</td>
+                                    <td>Up to 60 minutes with Growth Care</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Monthly performance check</th>
+                                    <td>Not included</td>
+                                    <td>Basic monthly review with Growth Care</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="services-pricing-care-notes">
+                        <div class="services-pricing-care-note">
+                            <h4>Essential Website Care</h4>
+                            <p>Technical monitoring, routine upkeep, and up to 30 minutes of content updates per month.</p>
+                        </div>
+                        <div class="services-pricing-care-note">
+                            <h4>Professional Growth Care</h4>
+                            <p>Technical monitoring, routine upkeep, basic monthly analytics review, and up to 60 minutes of content updates per month.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="services-pricing-scope">
+                    <p>Packages are designed around an agreed website structure. Additional landing pages, custom tools, major content creation, integrations, or changes outside the approved scope are quoted separately.</p>
+                    <p>Domain, hosting, premium software subscriptions, paid advertising, photography, and third-party tools are billed separately when required.</p>
+                    <p>Website copy, financial claims, disclosures, credentials, and all regulatory or firm compliance approvals remain the responsibility of the advisor and their firm.</p>
+                </div>
+
+                <div class="services-pricing-actions">
+                    <a href="../#contact" class="cta-button cta-primary" aria-label="Request a project quote via the contact section">Request a Project Quote</a>
                 </div>
             </div>
         </section>
 
-        <section class="section section-alt services-final-cta" aria-labelledby="services-cta-title">
+        <section id="what-i-can-do" class="section section-alt services-value-section" aria-labelledby="value-title">
+            <div class="services-value-shell">
+                <div class="services-value-intro">
+                    <p class="services-eyebrow">ENGAGEMENT</p>
+                    <h2 class="services-value-title" id="value-title">This Is What I Can Do for You</h2>
+                    <p class="services-value-copy">
+                        Bring the business need, workflow, or specific requirement. I turn it into a customized solution built into the website—structured for the people who will actually use it.
+                    </p>
+                    <p class="services-value-hint">Auto-advances · use arrows to browse</p>
+                </div>
+
+                <div class="services-value-stage">
+                    <button type="button" class="services-value-nav services-value-nav--prev" aria-label="Show previous benefit">
+                        <span aria-hidden="true">‹</span>
+                    </button>
+                    <button type="button" class="services-value-nav services-value-nav--next" aria-label="Show next benefit">
+                        <span aria-hidden="true">›</span>
+                    </button>
+
+                    <div class="services-value-panel" aria-live="polite" id="services-value-panel">
+                        <div class="services-value-meta">
+                            <span class="services-value-index" data-value-index>01</span>
+                            <span class="services-value-total">/ 10</span>
+                        </div>
+                        <h3 class="services-value-benefit-title" data-value-title>Credibility</h3>
+                        <p class="services-value-benefit-copy" data-value-copy>Look established and trustworthy before the first conversation.</p>
+                        <div class="services-value-progress" aria-hidden="true">
+                            <div class="services-value-progress-bar" data-value-progress></div>
+                        </div>
+                        <div class="services-value-markers" role="tablist" aria-label="Website benefits"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="get-started" class="section services-final-cta" aria-labelledby="services-cta-title">
             <div class="container">
                 <div class="services-final-cta-inner">
                     <h2 class="services-final-cta-title" id="services-cta-title">Ready to Get Started?</h2>
