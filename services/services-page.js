@@ -24,21 +24,49 @@
         </div>
     `;
 
-    const mediaMarkup = (project) => {
+    const mediaMarkup = (project, eager) => {
         const preview = project.preview || {};
         const alt = escapeHtml(preview.alt || `${project.name} website preview`);
         const image = escapeHtml(preview.image || '');
+        const webp = escapeHtml(preview.imageWebp || '');
+        const webpFull = escapeHtml(preview.imageWebpFull || webp);
+        const loading = eager ? 'eager' : 'lazy';
+        const fetchPriority = eager ? 'high' : 'low';
+        const source = webp
+            ? `<source type="image/webp" srcset="${webp} 960w, ${webpFull} 1024w" sizes="(max-width: 968px) 92vw, 55vw">`
+            : '';
+        const isPrivate = project.private || !project.liveUrl;
+        const overlay = isPrivate
+            ? `<div class="services-case-private-overlay" aria-hidden="true">
+                    <span class="services-case-private-badge">PRIVATE INTERNAL PLATFORM</span>
+               </div>`
+            : `<div class="services-case-live-overlay" aria-hidden="true"><span>View Live Website</span></div>`;
 
-        if (project.private || !project.liveUrl) {
+        const frame = `
+            <div class="services-case-screenshot-frame">
+                <picture>
+                    ${source}
+                    <img
+                        class="services-case-screenshot"
+                        src="${image}"
+                        alt="${alt}"
+                        width="1024"
+                        height="576"
+                        loading="${loading}"
+                        decoding="async"
+                        fetchpriority="${fetchPriority}"
+                        data-carousel-image
+                    >
+                </picture>
+                ${overlay}
+            </div>
+        `;
+
+        if (isPrivate) {
             return `
                 <div class="services-case-browser services-case-browser--screenshot services-case-browser--private">
                     ${chromeMarkup('internal · access restricted')}
-                    <div class="services-case-screenshot-frame">
-                        <img class="services-case-screenshot" src="${image}" alt="${alt}" loading="lazy" decoding="async" width="1024" height="576">
-                        <div class="services-case-private-overlay" aria-hidden="true">
-                            <span class="services-case-private-badge">PRIVATE INTERNAL PLATFORM</span>
-                        </div>
-                    </div>
+                    ${frame}
                 </div>
             `;
         }
@@ -48,10 +76,7 @@
             <a class="services-case-preview-link" href="${escapeHtml(project.liveUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Visit ${escapeHtml(project.name)} live website (opens in a new tab)">
                 <div class="services-case-browser services-case-browser--screenshot services-case-browser--live">
                     ${chromeMarkup(host)}
-                    <div class="services-case-screenshot-frame">
-                        <img class="services-case-screenshot" src="${image}" alt="${alt}" loading="lazy" decoding="async" width="1024" height="576">
-                        <div class="services-case-live-overlay" aria-hidden="true"><span>View Live Website</span></div>
-                    </div>
+                    ${frame}
                 </div>
             </a>
         `;
@@ -77,7 +102,7 @@
                 aria-label="${escapeHtml(project.name)} (${index + 1} of ${projects.length})"
             >
                 <div class="services-carousel-card-inner">
-                    <div class="services-carousel-media">${mediaMarkup(project)}</div>
+                    <div class="services-carousel-media">${mediaMarkup(project, index === 0)}</div>
                     <div class="services-carousel-copy">
                         <p class="services-case-category">${escapeHtml(project.category)}</p>
                         <h3 class="services-carousel-name">${escapeHtml(project.name)}</h3>
@@ -157,12 +182,29 @@
         return diff;
     };
 
+    const syncImages = () => {
+        cards.forEach((card, index) => {
+            const offset = Math.abs(relativeOffset(index));
+            const img = card.querySelector('[data-carousel-image]');
+            if (!img) return;
+            const isActive = offset === 0;
+            img.loading = isActive ? 'eager' : 'lazy';
+            if ('fetchPriority' in img) {
+                img.fetchPriority = isActive ? 'high' : 'low';
+            }
+        });
+    };
+
     const sync = () => {
         cards.forEach((card, index) => {
             const offset = relativeOffset(index);
+            const abs = Math.abs(offset);
             const isActive = offset === 0;
+            const isNear = abs <= 1;
             card.dataset.offset = String(offset);
             card.classList.toggle('is-active', isActive);
+            card.classList.toggle('is-near', isNear);
+            card.classList.toggle('is-far', !isNear);
             card.setAttribute('aria-hidden', isActive ? 'false' : 'true');
             card.inert = !isActive;
         });
@@ -177,6 +219,8 @@
         if (counter) {
             counter.textContent = `${pad(activeIndex + 1)} / ${pad(projects.length)}`;
         }
+
+        syncImages();
     };
 
     const goTo = (index) => {
@@ -264,11 +308,7 @@
 
     let active = 0;
     let swapTimer = null;
-    let autoTimer = null;
     let isAnimating = false;
-    let hasManualNav = false;
-    const AUTO_MS_DEFAULT = 3000;
-    const AUTO_MS_AFTER_MANUAL = 6000;
     const SLIDE_MS = 340;
 
     markersRoot.innerHTML = benefits
@@ -295,7 +335,7 @@
         titleEl.textContent = benefit.title;
         copyEl.textContent = benefit.copy;
         indexEl.textContent = String(index + 1).padStart(2, '0');
-        progressEl.style.width = `${((index + 1) / benefits.length) * 100}%`;
+        progressEl.style.setProperty('--progress', String((index + 1) / benefits.length));
         markers.forEach((marker, i) => {
             marker.classList.toggle('is-active', i === index);
             marker.setAttribute('aria-selected', i === index ? 'true' : 'false');
@@ -346,34 +386,8 @@
         goTo(active + dir, true, dir);
     };
 
-    const stopAuto = () => {
-        if (autoTimer) {
-            clearInterval(autoTimer);
-            autoTimer = null;
-        }
-    };
-
-    const startAuto = () => {
-        stopAuto();
-        if (preferReducedMotion) return;
-        const delay = hasManualNav ? AUTO_MS_AFTER_MANUAL : AUTO_MS_DEFAULT;
-        autoTimer = setInterval(() => step(1), delay);
-    };
-
-    const noteManualNav = () => {
-        hasManualNav = true;
-        startAuto();
-    };
-
-    prevBtn.addEventListener('click', () => {
-        step(-1);
-        noteManualNav();
-    });
-
-    nextBtn.addEventListener('click', () => {
-        step(1);
-        noteManualNav();
-    });
+    prevBtn.addEventListener('click', () => step(-1));
+    nextBtn.addEventListener('click', () => step(1));
 
     markers.forEach((marker) => {
         marker.addEventListener('click', () => {
@@ -381,34 +395,36 @@
             const dir = index >= active ? 1 : -1;
             if (isAnimating) return;
             goTo(index, true, dir);
-            startAuto();
         });
-    });
-
-    panel.addEventListener('mouseenter', stopAuto);
-    panel.addEventListener('mouseleave', startAuto);
-    panel.addEventListener('focusin', stopAuto);
-    panel.addEventListener('focusout', (event) => {
-        if (!panel.contains(event.relatedTarget)) startAuto();
     });
 
     section.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowLeft') {
             event.preventDefault();
             step(-1);
-            startAuto();
         } else if (event.key === 'ArrowRight') {
             event.preventDefault();
             step(1);
-            startAuto();
         }
     });
 
-    document.addEventListener('visibilitychange', () => {
-        if (document.hidden) stopAuto();
-        else startAuto();
-    });
-
     goTo(0, false, 1);
-    startAuto();
+})();
+
+(function initServicesMotionGuard() {
+    const preferReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (preferReducedMotion) return;
+
+    const heroStage = document.querySelector('.services-hero-stage');
+    if (heroStage && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    entry.target.classList.toggle('is-paused', !entry.isIntersecting);
+                });
+            },
+            { rootMargin: '40px 0px', threshold: 0.05 }
+        );
+        observer.observe(heroStage);
+    }
 })();

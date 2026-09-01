@@ -40,20 +40,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Navbar scroll effect
-const navbar = document.getElementById('navbar');
-if (navbar) {
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 50) {
-            navbar.style.borderBottomColor = 'var(--border-color)';
-        } else {
-            navbar.style.borderBottomColor = 'var(--border-color)';
-        }
-    });
-}
-
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -424,6 +410,7 @@ if (downloadResume) {
 // Ambient terminal canvas — visible drifting ticks, dots, and faint trails
 (function initAmbientCanvas() {
     const canvas = document.getElementById('ambient-canvas');
+    const ambientRoot = document.getElementById('ambient-bg');
     if (!canvas) return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -432,7 +419,7 @@ if (downloadResume) {
         return;
     }
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     let width = 0;
@@ -440,38 +427,55 @@ if (downloadResume) {
     let animationId = 0;
     let particles = [];
     let sparks = [];
+    let running = true;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+    const setPaused = (paused) => {
+        if (ambientRoot) ambientRoot.classList.toggle('is-paused', paused);
+        if (paused) {
+            running = false;
+            cancelAnimationFrame(animationId);
+            return;
+        }
+        if (!running) {
+            running = true;
+            draw();
+        }
+    };
 
     const resize = () => {
         width = window.innerWidth;
         height = window.innerHeight;
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.5);
         canvas.width = Math.floor(width * dpr);
         canvas.height = Math.floor(height * dpr);
         canvas.style.width = `${width}px`;
         canvas.style.height = `${height}px`;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        const count = Math.max(42, Math.floor((width * height) / 28000));
+        const density = isMobile ? 52000 : 42000;
+        const count = Math.max(isMobile ? 14 : 18, Math.min(isMobile ? 24 : 32, Math.floor((width * height) / density)));
         particles = Array.from({ length: count }, () => ({
             x: Math.random() * width,
             y: Math.random() * height,
-            vx: (Math.random() - 0.5) * 0.55,
-            vy: (Math.random() - 0.4) * 0.35,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.4) * 0.28,
             size: Math.random() > 0.65 ? 2 : 1.2,
-            alpha: 0.35 + Math.random() * 0.45,
-            tick: Math.random() > 0.62
+            alpha: 0.28 + Math.random() * 0.35,
+            tick: Math.random() > 0.7
         }));
 
-        sparks = Array.from({ length: 8 }, () => ({
+        sparks = Array.from({ length: isMobile ? 3 : 5 }, () => ({
             x: Math.random() * width,
             y: Math.random() * height,
-            len: 40 + Math.random() * 90,
-            speed: 0.8 + Math.random() * 1.4,
-            alpha: 0.2 + Math.random() * 0.35
+            len: 40 + Math.random() * 70,
+            speed: 0.7 + Math.random() * 1.1,
+            alpha: 0.16 + Math.random() * 0.25
         }));
     };
 
     const draw = () => {
+        if (!running) return;
         ctx.clearRect(0, 0, width, height);
 
         for (const p of particles) {
@@ -520,16 +524,16 @@ if (downloadResume) {
     draw();
 
     let resizeTimer = null;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(resize, 120);
-    });
+    window.addEventListener(
+        'resize',
+        () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(resize, 120);
+        },
+        { passive: true }
+    );
 
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-            cancelAnimationFrame(animationId);
-        } else if (!prefersReducedMotion) {
-            draw();
-        }
+        setPaused(document.hidden);
     });
 })();

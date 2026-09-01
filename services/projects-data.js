@@ -21,6 +21,8 @@ window.SERVICES_PROJECTS = [
         technologies: [],
         preview: {
             image: '../assets/services/haluska-hoops-home.jpg',
+            imageWebp: '../assets/services/haluska-hoops-home-960.webp',
+            imageWebpFull: '../assets/services/haluska-hoops-home.webp',
             alt: 'Haluska Hoops homepage showing the basketball training hero and Book Assessment call to action'
         },
         private: false
@@ -50,6 +52,8 @@ window.SERVICES_PROJECTS = [
         ],
         preview: {
             image: '../assets/services/colin-haluska-investments-home.jpg',
+            imageWebp: '../assets/services/colin-haluska-investments-home-960.webp',
+            imageWebpFull: '../assets/services/colin-haluska-investments-home.webp',
             alt: 'Colin Haluska Investments homepage with paper trading terminal card and Access Terminal call to action'
         },
         private: false
@@ -72,6 +76,8 @@ window.SERVICES_PROJECTS = [
         technologies: [],
         preview: {
             image: '../assets/services/sfg-resource-hub-login.jpg',
+            imageWebp: '../assets/services/sfg-resource-hub-login-960.webp',
+            imageWebpFull: '../assets/services/sfg-resource-hub-login.webp',
             alt: 'SFG Resource Hub private login interface labeled Internal Use Only'
         },
         private: true
