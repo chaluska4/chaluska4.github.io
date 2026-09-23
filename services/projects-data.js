@@ -33,9 +33,9 @@ window.SERVICES_PROJECTS = [
         category: 'Full-Stack Financial Technology Application',
         liveUrl: 'https://colinhaluskainvestments.com/',
         overview:
-            'A full-stack paper-trading platform where users can create portfolios, execute simulated trades, research investments, and track performance.',
+            'A full-stack paper-trading platform with buy/sell orders, portfolio holdings, real-time P&L, a transaction ledger, market-data APIs, and cash-validation logic that mirrors core brokerage workflows.',
         whatIBuilt:
-            'I connected a responsive financial dashboard with secure authentication, market-data APIs, transaction-based portfolio accounting, and performance analytics.',
+            'I built the platform end-to-end as Founder & Developer (March 2026 – Present), connecting a responsive financial dashboard with market-data APIs, transaction-based portfolio accounting, and real-time P&L.',
         skills: [
             'Full-stack development',
             'API and market-data integration',
@@ -66,7 +66,7 @@ window.SERVICES_PROJECTS = [
         overview:
             'A protected internal platform that centralizes frequently used carrier, licensing, and operational resources for authorized team members.',
         whatIBuilt:
-            'I transformed scattered reference materials into an organized, responsive hub with structured navigation, interactive licensing maps, and protected access.',
+            'I consolidated 22-carrier reference material, licensing protocols, and carrier wire-transfer instructions into a searchable internal reference registry with structured navigation and protected access.',
         skills: [
             'Internal tool development',
             'Information architecture',
