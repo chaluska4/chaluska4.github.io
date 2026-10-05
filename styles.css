@@ -1680,6 +1680,8 @@ body {
     border-radius: 6px;
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     backdrop-filter: blur(6px);
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .skill-category:hover {
@@ -3873,6 +3875,10 @@ body {
     height: 100%;
 }
 
+.project-card[hidden] {
+    display: none;
+}
+
 .project-card {
     background-color: rgba(26, 34, 48, 0.88);
     border: 1px solid var(--border-color);
@@ -4199,6 +4205,21 @@ body {
     border-top: 1px solid var(--border-light);
 }
 
+.project-actions--multiple {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    width: 100%;
+}
+
+.project-link-todo-note {
+    width: 100%;
+    margin: 0.5rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+}
+
 .project-link-button {
     display: inline-flex;
     align-items: center;
@@ -4222,16 +4243,19 @@ body {
 }
 
 .project-link-button:disabled,
-.project-link-button[disabled] {
+.project-link-button[disabled],
+.project-link-button--todo {
     opacity: 0.5;
     cursor: not-allowed;
     background-color: var(--bg-secondary);
     border-color: var(--border-color);
     color: var(--text-muted);
+    pointer-events: none;
 }
 
 .project-link-button:disabled:hover,
-.project-link-button[disabled]:hover {
+.project-link-button[disabled]:hover,
+.project-link-button--todo:hover {
     opacity: 0.5;
     background-color: var(--bg-secondary);
     border-color: var(--border-color);
@@ -4288,6 +4312,34 @@ body {
     line-height: 1.65;
     color: var(--text-primary);
     margin-bottom: 1rem;
+}
+
+.project-data-note,
+.project-implementation-note {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.project-data-note {
+    color: var(--accent-amber);
+    font-family: var(--font-mono);
+}
+
+.project-implementation-note {
+    color: var(--text-muted);
+}
+
+.close-acceleration-card {
+    border-color: rgba(90, 134, 176, 0.72);
+    background:
+        linear-gradient(150deg, rgba(61, 107, 154, 0.15), rgba(26, 34, 48, 0.94) 52%, rgba(11, 14, 20, 0.96));
+}
+
+.close-acceleration-card .project-subtitle {
+    color: var(--accent-light);
+    text-transform: none;
+    letter-spacing: 0.02em;
 }
 
 .project-competencies {
@@ -5120,6 +5172,17 @@ body {
         padding: 12px 1.5rem;
     }
 
+    .project-tab-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-tab-button {
+        width: 100%;
+        height: auto;
+        line-height: 1.35;
+    }
+
     .contact-info-card {
         padding: 1.5rem;
     }
@@ -5431,6 +5494,15 @@ select:focus-visible {
 
     .cta-button {
         width: 100%;
+    }
+
+    .project-tab-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .project-actions--multiple .project-link-button {
+        width: 100%;
+        justify-content: center;
     }
 
     .hero-pill {

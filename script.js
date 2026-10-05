@@ -145,28 +145,26 @@ tabButtons.forEach(button => {
     });
 });
 
-// Tab functionality for Projects section
+// Multi-category filtering for Projects section
 const projectTabButtons = document.querySelectorAll('.project-tab-button');
-const projectTabPanes = document.querySelectorAll('.project-tab-pane');
+const projectCards = document.querySelectorAll('#project-grid .project-card');
 
 projectTabButtons.forEach(button => {
     button.addEventListener('click', () => {
-        const targetTab = button.getAttribute('data-project-tab');
+        const targetFilter = button.getAttribute('data-project-filter');
         
-        // Remove active class from all buttons and panes
         projectTabButtons.forEach(btn => {
             btn.classList.remove('active');
-            btn.setAttribute('aria-selected', 'false');
+            btn.setAttribute('aria-pressed', 'false');
         });
-        projectTabPanes.forEach(pane => pane.classList.remove('active'));
         
-        // Add active class to clicked button and corresponding pane
         button.classList.add('active');
-        button.setAttribute('aria-selected', 'true');
-        const targetPane = document.getElementById(`project-tab-${targetTab}`);
-        if (targetPane) {
-            targetPane.classList.add('active');
-        }
+        button.setAttribute('aria-pressed', 'true');
+
+        projectCards.forEach(card => {
+            const categories = (card.getAttribute('data-category') || '').split(/\s+/);
+            card.hidden = targetFilter !== 'all' && !categories.includes(targetFilter);
+        });
     });
 
     // Keyboard navigation for project tabs
@@ -397,15 +395,6 @@ if (contactForm) {
     tick();
     setInterval(tick, 1000);
 })();
-
-// Download Resume handler
-const downloadResume = document.getElementById('download-resume');
-if (downloadResume) {
-    downloadResume.addEventListener('click', (e) => {
-        // The download attribute in HTML will handle the download
-        // No need to prevent default or show alert
-    });
-}
 
 // Ambient terminal canvas — visible drifting ticks, dots, and faint trails
 (function initAmbientCanvas() {

@@ -124,7 +124,7 @@
                         <span class="cta-play" aria-hidden="true"></span>
                         See the Work
                     </a>
-                    <a href="assets/Colin-Haluska-Resume.pdf" target="_blank" rel="noopener noreferrer" class="cta-button cta-secondary">Résumé.pdf</a>
+                    <a href="assets/Colin_Haluska_Resume.pdf" download="Colin_Haluska_Resume.pdf" class="cta-button cta-secondary" aria-label="Download Colin Haluska resume PDF">Résumé.pdf</a>
                     <a href="#contact" class="cta-button cta-ghost">Start a Thread</a>
                 </div>
             </div>
@@ -286,11 +286,11 @@
                                     <div class="skills-grid">
                                         <div class="skill-category">
                                             <h4>Financial &amp; Operations</h4>
-                                            <p>Bloomberg Terminal, Financial Modeling, Equity Research, Portfolio Analysis, Asset Transfer Workflows, NIGO Review, Annuity Operations</p>
+                                            <p>Bloomberg Terminal, Financial Modeling, Equity Research, Portfolio Analysis, Asset Transfer Workflows, NIGO Review, Annuity Operations, Variance Analysis, Budgeting &amp; Forecasting, Month-End Close, KPI Reporting, Financial Statement Analysis, Internal Controls</p>
                                         </div>
                                         <div class="skill-category">
                                             <h4>Technical &amp; Software</h4>
-                                            <p>Python, FastAPI, SQLAlchemy, SQLite, Next.js, React, TypeScript, Azure Blob Storage, Azure AI Document Intelligence, REST APIs, Advanced Excel</p>
+                                            <p>Python, pandas, openpyxl, FastAPI, SQLAlchemy, SQLite, Next.js, React, TypeScript, Vite, Tailwind CSS, Recharts, HTML/CSS/JavaScript, REST APIs, Azure Blob Storage, Azure AI Document Intelligence, Advanced Excel, ChatGPT, Claude, Claude Code, Cursor, AI Agent Orchestration, Prompt Engineering, Vercel, Git/GitHub</p>
                                         </div>
                                         <div class="skill-category">
                                             <h4>Certifications</h4>
@@ -386,168 +386,100 @@
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             <div class="projects-tabs">
-                <div class="project-tab-buttons" role="tablist" aria-label="Project category tabs">
-                    <button class="project-tab-button active" data-project-tab="all" role="tab" aria-selected="true" aria-controls="project-tab-all" id="project-tab-button-all">All</button>
-                    <button class="project-tab-button" data-project-tab="website" role="tab" aria-selected="false" aria-controls="project-tab-website" id="project-tab-button-website">Website Development</button>
-                    <button class="project-tab-button" data-project-tab="fintech" role="tab" aria-selected="false" aria-controls="project-tab-fintech" id="project-tab-button-fintech">Fintech Projects</button>
-                    <button class="project-tab-button" data-project-tab="internal" role="tab" aria-selected="false" aria-controls="project-tab-internal" id="project-tab-button-internal">Internal Tools</button>
+                <div class="project-tab-buttons" role="group" aria-label="Filter projects by category">
+                    <button class="project-tab-button active" data-project-filter="all" aria-pressed="true">All</button>
+                    <button class="project-tab-button" data-project-filter="web" aria-pressed="false">Web</button>
+                    <button class="project-tab-button" data-project-filter="fintech" aria-pressed="false">Fintech &amp; Automation</button>
+                    <button class="project-tab-button" data-project-filter="fpa" aria-pressed="false">FP&amp;A &amp; Reporting</button>
                 </div>
                 <div class="projects-content">
-                    <div class="project-tab-pane active" id="project-tab-all" role="tabpanel" aria-labelledby="project-tab-button-all">
-                        <div class="projects-grid">
-                            <div class="project-card portfolio-website-card" data-category="website">
-                                <h3>Personal Portfolio Website</h3>
-                                <p class="project-context">Website Development</p>
-                                <p>Built a responsive, professional portfolio website using HTML, CSS, and JavaScript. Features include smooth navigation, tabbed content sections, and a modern corporate design aesthetic.</p>
-                                <div class="project-tools">
-                                    <span>HTML</span>
-                                    <span>CSS</span>
-                                    <span>JavaScript</span>
-                                    <span>Responsive Design</span>
-                                </div>
-                                <div class="project-actions">
-                                    <a href="https://chaluska4.github.io" target="_blank" rel="noopener noreferrer" class="project-link-button">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                            <polyline points="15 3 21 3 21 9"></polyline>
-                                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                                        </svg>
-                                        <span>Visit Website</span>
-                                    </a>
-                                </div>
+                    <div class="projects-grid" id="project-grid" aria-live="polite">
+                        <article class="project-card close-acceleration-card" data-category="fintech fpa">
+                            <h3>Close Acceleration Pack</h3>
+                            <p class="project-subtitle">FP&amp;A Reporting Automation · Independent Project · Synthetic Data</p>
+                            <p class="project-summary">Automated month-end close reporting workflow for a fictional consumer-goods company (Beacon Outdoor Goods). Turns 12 months of Actual/Budget/Forecast data into three Excel deliverables: variance analysis (±5%/$10K materiality flags, top favorable/unfavorable drivers, Operating Income bridge reconciling to $0), executive KPI dashboard, and a Day 1-5 close checklist with a 12-control log and bank-reconciliation exception tracking. Built with Python, SQLite, pandas, openpyxl; React/TypeScript frontend on Vercel; 60 automated tests.</p>
+                            <p class="project-data-note">All company and financial data is synthetic.</p>
+                            <p class="project-implementation-note">The frontend is static and powered by data exported from the Python/SQLite pipeline.</p>
+                            <div class="project-tools">
+                                <span>Variance Analysis</span>
+                                <span>Materiality Flags</span>
+                                <span>Operating Income Bridge</span>
+                                <span>Executive KPI Dashboard</span>
+                                <span>Month-End Close</span>
+                                <span>Controls Log</span>
+                                <span>Python</span>
+                                <span>SQLite</span>
+                                <span>React</span>
                             </div>
-                            <div class="project-card portfolio-tracker-card chi-investments-card" data-category="fintech">
-                                <h3>Colin Haluska Investments</h3>
-                                <p class="project-subtitle">Founder &amp; Developer · March 2026 – Present</p>
-                                <p class="project-summary">Built a full-stack paper-trading platform with buy/sell orders, portfolio holdings, real-time P&amp;L, a transaction ledger, market-data APIs, and cash-validation logic that mirrors core brokerage workflows.</p>
-                                <div class="project-competencies">
-                                    <span>Full-Stack Development</span>
-                                    <span>Paper Trading Engine</span>
-                                    <span>Portfolio Ledger Accounting</span>
-                                    <span>Real-Time Market Data</span>
-                                    <span>JWT Authentication Security</span>
-                                    <span>Multi-Portfolio Architecture</span>
-                                    <span>RESTful API Backend</span>
-                                    <span>Database Engineering</span>
-                                    <span>Cloud Deployment & DevOps</span>
-                                    <span>Cybersecurity & App Security</span>
-                                    <span>Financial Systems & FinTech Engineering</span>
-                                </div>
-                                <div class="project-actions">
-                                    <a href="https://www.colinhaluskainvestments.com/" target="_blank" rel="noopener noreferrer" class="project-link-button">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                            <polyline points="15 3 21 3 21 9"></polyline>
-                                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                                        </svg>
-                                        <span>View Website Application</span>
-                                    </a>
-                                </div>
+                            <div class="project-actions project-actions--multiple">
+                                <button class="project-link-button project-link-button--todo" disabled data-todo-url="[LIVE_DEMO_URL]" title="TODO: Add LIVE_DEMO_URL"><span>View Live Demo</span></button>
+                                <button class="project-link-button project-link-button--todo" disabled data-todo-url="[GITHUB_REPO_URL]" title="TODO: Add GITHUB_REPO_URL"><span>View on GitHub</span></button>
                             </div>
-                            <div class="project-card sfg-checker-card" data-category="internal">
-                                <h3>SFG Application Checker</h3>
-                                <p class="project-subtitle">Internal Annuity Packet Review Automation</p>
-                                <p class="project-summary">Internal pre-review platform built for SFG Annuity Advisors that uses Azure Document Intelligence to classify annuity application pages, flag Not In Good Order (NIGO) conditions, and validate required forms across 10+ document categories before submission.</p>
-                                <div class="project-tools">
-                                    <span>Full-stack web app</span>
-                                    <span>Azure Blob Storage</span>
-                                    <span>Azure AI Document Intelligence</span>
-                                    <span>OCR pipeline</span>
-                                    <span>Rule-based validation</span>
-                                    <span>NIGO detection</span>
-                                </div>
-                                <div class="project-outcome">
-                                    <strong>Access:</strong> Internal use only — not publicly available.
-                                </div>
-                                <div class="project-actions">
-                                    <button class="project-link-button" disabled>
-                                        <span>Internal Use Only</span>
-                                    </button>
-                                </div>
+                            <p class="project-link-todo-note">TODO: Add LIVE_DEMO_URL and GITHUB_REPO_URL.</p>
+                        </article>
+
+                        <article class="project-card portfolio-tracker-card chi-investments-card" data-category="fintech">
+                            <h3>Colin Haluska Investments</h3>
+                            <p class="project-subtitle">Founder &amp; Developer · March 2026 – Present</p>
+                            <p class="project-summary">Built a full-stack paper-trading platform with buy/sell orders, portfolio holdings, real-time P&amp;L, a transaction ledger, market-data APIs, and cash-validation logic that mirrors core brokerage workflows.</p>
+                            <div class="project-competencies">
+                                <span>Full-Stack Development</span>
+                                <span>Paper Trading Engine</span>
+                                <span>Portfolio Ledger Accounting</span>
+                                <span>Real-Time Market Data</span>
+                                <span>JWT Authentication Security</span>
+                                <span>Multi-Portfolio Architecture</span>
+                                <span>RESTful API Backend</span>
+                                <span>Database Engineering</span>
+                                <span>Cloud Deployment &amp; DevOps</span>
+                                <span>Cybersecurity &amp; App Security</span>
+                                <span>Financial Systems &amp; FinTech Engineering</span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="project-tab-pane" id="project-tab-website" role="tabpanel" aria-labelledby="project-tab-button-website">
-                        <div class="projects-grid">
-                            <div class="project-card portfolio-website-card" data-category="website">
-                                <h3>Personal Portfolio Website</h3>
-                                <p class="project-context">Website Development</p>
-                                <p>Built a responsive, professional portfolio website using HTML, CSS, and JavaScript. Features include smooth navigation, tabbed content sections, and a modern corporate design aesthetic.</p>
-                                <div class="project-tools">
-                                    <span>HTML</span>
-                                    <span>CSS</span>
-                                    <span>JavaScript</span>
-                                    <span>Responsive Design</span>
-                                </div>
-                                <div class="project-actions">
-                                    <a href="https://chaluska4.github.io" target="_blank" rel="noopener noreferrer" class="project-link-button">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                            <polyline points="15 3 21 3 21 9"></polyline>
-                                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                                        </svg>
-                                        <span>Visit Website</span>
-                                    </a>
-                                </div>
+                            <div class="project-actions">
+                                <a href="https://www.colinhaluskainvestments.com/" target="_blank" rel="noopener noreferrer" class="project-link-button">
+                                    <span>View Website Application</span>
+                                </a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="project-tab-pane" id="project-tab-fintech" role="tabpanel" aria-labelledby="project-tab-button-fintech">
-                        <div class="projects-grid">
-                            <div class="project-card portfolio-tracker-card chi-investments-card" data-category="fintech">
-                                <h3>Colin Haluska Investments</h3>
-                                <p class="project-subtitle">Founder &amp; Developer · March 2026 – Present</p>
-                                <p class="project-summary">Built a full-stack paper-trading platform with buy/sell orders, portfolio holdings, real-time P&amp;L, a transaction ledger, market-data APIs, and cash-validation logic that mirrors core brokerage workflows.</p>
-                                <div class="project-competencies">
-                                    <span>Full-Stack Development</span>
-                                    <span>Paper Trading Engine</span>
-                                    <span>Portfolio Ledger Accounting</span>
-                                    <span>Real-Time Market Data</span>
-                                    <span>JWT Authentication Security</span>
-                                    <span>Multi-Portfolio Architecture</span>
-                                    <span>RESTful API Backend</span>
-                                    <span>Database Engineering</span>
-                                    <span>Cloud Deployment & DevOps</span>
-                                    <span>Cybersecurity & App Security</span>
-                                    <span>Financial Systems & FinTech Engineering</span>
-                                </div>
-                                <div class="project-actions">
-                                    <a href="https://www.colinhaluskainvestments.com/" target="_blank" rel="noopener noreferrer" class="project-link-button">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                            <polyline points="15 3 21 3 21 9"></polyline>
-                                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                                        </svg>
-                                        <span>View Website Application</span>
-                                    </a>
-                                </div>
+                        </article>
+
+                        <article class="project-card sfg-checker-card" data-category="fintech">
+                            <h3>SFG Application Checker</h3>
+                            <p class="project-subtitle">Internal Annuity Packet Review Automation</p>
+                            <p class="project-summary">Internal pre-review platform built for SFG Annuity Advisors that uses Azure Document Intelligence to classify annuity application pages, flag Not In Good Order (NIGO) conditions, and validate required forms across 10+ document categories before submission.</p>
+                            <div class="project-tools">
+                                <span>Full-stack web app</span>
+                                <span>Azure Blob Storage</span>
+                                <span>Azure AI Document Intelligence</span>
+                                <span>OCR pipeline</span>
+                                <span>Rule-based validation</span>
+                                <span>NIGO detection</span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="project-tab-pane" id="project-tab-internal" role="tabpanel" aria-labelledby="project-tab-button-internal">
-                        <div class="projects-grid">
-                            <div class="project-card sfg-checker-card" data-category="internal">
-                                <h3>SFG Application Checker</h3>
-                                <p class="project-subtitle">Internal Annuity Packet Review Automation</p>
-                                <p class="project-summary">Internal pre-review platform built for SFG Annuity Advisors that uses Azure Document Intelligence to classify annuity application pages, flag Not In Good Order (NIGO) conditions, and validate required forms across 10+ document categories before submission.</p>
-                                <div class="project-tools">
-                                    <span>Full-stack web app</span>
-                                    <span>Azure Blob Storage</span>
-                                    <span>Azure AI Document Intelligence</span>
-                                    <span>OCR pipeline</span>
-                                    <span>Rule-based validation</span>
-                                    <span>NIGO detection</span>
-                                </div>
-                                <div class="project-outcome">
-                                    <strong>Access:</strong> Internal use only — not publicly available.
-                                </div>
-                                <div class="project-actions">
-                                    <button class="project-link-button" disabled>
-                                        <span>Internal Use Only</span>
-                                    </button>
-                                </div>
+                            <div class="project-outcome">
+                                <strong>Access:</strong> Internal use only — not publicly available.
                             </div>
-                        </div>
+                            <div class="project-actions">
+                                <button class="project-link-button" disabled>
+                                    <span>Internal Use Only</span>
+                                </button>
+                            </div>
+                        </article>
+
+                        <article class="project-card portfolio-website-card" data-category="web">
+                            <h3>Personal Portfolio Website</h3>
+                            <p class="project-context">Web</p>
+                            <p>Built a responsive, professional portfolio website using HTML, CSS, and JavaScript. Features include smooth navigation, tabbed content sections, and a modern corporate design aesthetic.</p>
+                            <div class="project-tools">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                                <span>Responsive Design</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://chaluska4.github.io" target="_blank" rel="noopener noreferrer" class="project-link-button">
+                                    <span>Visit Website</span>
+                                </a>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </div>
@@ -607,7 +539,7 @@
                                 <polyline points="22,6 12,13 2,6"></polyline>
                             </svg>
                         </a>
-                        <a href="assets/Colin-Haluska-Resume.pdf" target="_blank" rel="noopener noreferrer" class="social-link resume-link" id="download-resume" aria-label="View Resume">
+                        <a href="assets/Colin_Haluska_Resume.pdf" download="Colin_Haluska_Resume.pdf" class="social-link resume-link" id="download-resume" aria-label="Download Colin Haluska resume PDF">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                                 <polyline points="14 2 14 8 20 8"></polyline>
