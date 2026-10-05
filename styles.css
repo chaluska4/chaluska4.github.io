@@ -4205,21 +4205,6 @@ body {
     border-top: 1px solid var(--border-light);
 }
 
-.project-actions--multiple {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.625rem;
-    width: 100%;
-}
-
-.project-link-todo-note {
-    width: 100%;
-    margin: 0.5rem 0 0;
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    color: var(--text-muted);
-}
-
 .project-link-button {
     display: inline-flex;
     align-items: center;
@@ -4243,8 +4228,7 @@ body {
 }
 
 .project-link-button:disabled,
-.project-link-button[disabled],
-.project-link-button--todo {
+.project-link-button[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
     background-color: var(--bg-secondary);
@@ -4254,8 +4238,7 @@ body {
 }
 
 .project-link-button:disabled:hover,
-.project-link-button[disabled]:hover,
-.project-link-button--todo:hover {
+.project-link-button[disabled]:hover {
     opacity: 0.5;
     background-color: var(--bg-secondary);
     border-color: var(--border-color);
@@ -5498,11 +5481,6 @@ select:focus-visible {
 
     .project-tab-buttons {
         grid-template-columns: 1fr;
-    }
-
-    .project-actions--multiple .project-link-button {
-        width: 100%;
-        justify-content: center;
     }
 
     .hero-pill {
