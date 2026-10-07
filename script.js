@@ -148,6 +148,24 @@ tabButtons.forEach(button => {
 // Multi-category filtering for Projects section
 const projectTabButtons = document.querySelectorAll('.project-tab-button');
 const projectCards = document.querySelectorAll('#project-grid .project-card');
+const projectGrid = document.getElementById('project-grid');
+
+document.querySelectorAll('.project-chips').forEach(chipGroup => {
+    const chips = Array.from(chipGroup.querySelectorAll(':scope > span'));
+    if (chips.length <= 6) return;
+
+    const overflowChips = chips.slice(6);
+    overflowChips.forEach(chip => {
+        chip.hidden = true;
+    });
+
+    const moreChip = document.createElement('span');
+    moreChip.className = 'project-chip-more';
+    moreChip.textContent = `+${overflowChips.length}`;
+    moreChip.title = overflowChips.map(chip => chip.textContent.trim()).join(', ');
+    moreChip.setAttribute('aria-label', `${overflowChips.length} more: ${moreChip.title}`);
+    chipGroup.appendChild(moreChip);
+});
 
 projectTabButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -160,11 +178,15 @@ projectTabButtons.forEach(button => {
         
         button.classList.add('active');
         button.setAttribute('aria-pressed', 'true');
+        projectGrid?.classList.toggle('is-all', targetFilter === 'all');
 
+        let visibleCount = 0;
         projectCards.forEach(card => {
             const categories = (card.getAttribute('data-category') || '').split(/\s+/);
             card.hidden = targetFilter !== 'all' && !categories.includes(targetFilter);
+            if (!card.hidden) visibleCount += 1;
         });
+        if (projectGrid) projectGrid.dataset.visibleCount = String(visibleCount);
     });
 
     // Keyboard navigation for project tabs

@@ -393,26 +393,39 @@
                     <button class="project-tab-button" data-project-filter="fpa" aria-pressed="false">FP&amp;A &amp; Reporting</button>
                 </div>
                 <div class="projects-content">
-                    <div class="projects-grid" id="project-grid" aria-live="polite">
+                    <div class="projects-grid is-all" id="project-grid" aria-live="polite">
                         <article class="project-card close-acceleration-card" data-category="fintech fpa">
-                            <h3>Close Acceleration Pack</h3>
-                            <p class="project-subtitle">FP&amp;A Reporting Automation · Independent Project · Synthetic Data</p>
-                            <p class="project-summary">Automated month-end close reporting workflow for a fictional consumer-goods company (Beacon Outdoor Goods). Turns 12 months of Actual/Budget/Forecast data into three Excel deliverables: variance analysis (±5%/$10K materiality flags, top favorable/unfavorable drivers, Operating Income bridge reconciling to $0), executive KPI dashboard, and a Day 1-5 close checklist with a 12-control log and bank-reconciliation exception tracking. Built with Python, SQLite, pandas, openpyxl; React/TypeScript frontend on Vercel; 60 automated tests.</p>
-                            <p class="project-data-note">All company and financial data is synthetic.</p>
-                            <p class="project-implementation-note">The frontend is static and powered by data exported from the Python/SQLite pipeline.</p>
-                            <div class="project-tools">
-                                <span>Variance Analysis</span>
-                                <span>Materiality Flags</span>
-                                <span>Operating Income Bridge</span>
-                                <span>Executive KPI Dashboard</span>
-                                <span>Month-End Close</span>
-                                <span>Controls Log</span>
-                                <span>Python</span>
-                                <span>SQLite</span>
-                                <span>React</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="https://close-acceleration-pack.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link-button"><span>View Live Demo</span></a>
+                            <div class="project-featured-layout">
+                                <div class="project-featured-copy">
+                                    <h3>Close Acceleration Pack</h3>
+                                    <p class="project-eyebrow">FP&amp;A REPORTING AUTOMATION - INDEPENDENT PROJECT - SYNTHETIC DATA</p>
+                                    <p class="project-summary">Automated month-end close reporting workflow for a fictional consumer-goods company. Turns 12 months of Actual/Budget/Forecast data into variance analysis, an executive KPI dashboard, and a close checklist with a controls log.</p>
+                                    <p class="project-footnote">Synthetic data only. Static frontend powered by data exported from the Python/SQLite pipeline.</p>
+                                </div>
+                                <div class="project-featured-details">
+                                    <div class="project-stats" aria-label="Close Acceleration Pack statistics">
+                                        <div class="project-stat"><strong>12</strong><span>Months of data</span></div>
+                                        <div class="project-stat"><strong>3</strong><span>Excel deliverables</span></div>
+                                        <div class="project-stat"><strong>12</strong><span>Controls logged</span></div>
+                                        <div class="project-stat"><strong>$0</strong><span>Bridge difference</span></div>
+                                        <div class="project-stat"><strong>60</strong><span>Automated tests</span></div>
+                                    </div>
+                                    <div class="project-chips" aria-label="Technologies and capabilities">
+                                        <span>Variance Analysis</span>
+                                        <span>Materiality Flags</span>
+                                        <span>Operating Income Bridge</span>
+                                        <span>KPI Dashboard</span>
+                                        <span>Month-End Close</span>
+                                        <span>Controls Log</span>
+                                        <span>Python</span>
+                                        <span>SQLite</span>
+                                        <span>React</span>
+                                    </div>
+                                    <div class="project-actions">
+                                        <a href="https://close-acceleration-pack.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link-button" aria-label="View Close Acceleration Pack live demo"><span>View Live Demo</span></a>
+                                        <button class="project-link-button project-link-button--todo" disabled data-todo-url="[GITHUB_REPO_URL]" title="TODO: Add GITHUB_REPO_URL" aria-label="View Close Acceleration Pack on GitHub; link coming soon"><span>View on GitHub</span></button>
+                                    </div>
+                                </div>
                             </div>
                         </article>
 
@@ -420,7 +433,7 @@
                             <h3>Colin Haluska Investments</h3>
                             <p class="project-subtitle">Founder &amp; Developer · March 2026 – Present</p>
                             <p class="project-summary">Built a full-stack paper-trading platform with buy/sell orders, portfolio holdings, real-time P&amp;L, a transaction ledger, market-data APIs, and cash-validation logic that mirrors core brokerage workflows.</p>
-                            <div class="project-competencies">
+                            <div class="project-chips" aria-label="Technologies and capabilities">
                                 <span>Full-Stack Development</span>
                                 <span>Paper Trading Engine</span>
                                 <span>Portfolio Ledger Accounting</span>
@@ -434,7 +447,7 @@
                                 <span>Financial Systems &amp; FinTech Engineering</span>
                             </div>
                             <div class="project-actions">
-                                <a href="https://www.colinhaluskainvestments.com/" target="_blank" rel="noopener noreferrer" class="project-link-button">
+                                <a href="https://www.colinhaluskainvestments.com/" target="_blank" rel="noopener noreferrer" class="project-link-button" aria-label="View Colin Haluska Investments website application">
                                     <span>View Website Application</span>
                                 </a>
                             </div>
@@ -444,7 +457,7 @@
                             <h3>SFG Application Checker</h3>
                             <p class="project-subtitle">Internal Annuity Packet Review Automation</p>
                             <p class="project-summary">Internal pre-review platform built for SFG Annuity Advisors that uses Azure Document Intelligence to classify annuity application pages, flag Not In Good Order (NIGO) conditions, and validate required forms across 10+ document categories before submission.</p>
-                            <div class="project-tools">
+                            <div class="project-chips" aria-label="Technologies and capabilities">
                                 <span>Full-stack web app</span>
                                 <span>Azure Blob Storage</span>
                                 <span>Azure AI Document Intelligence</span>
@@ -452,11 +465,8 @@
                                 <span>Rule-based validation</span>
                                 <span>NIGO detection</span>
                             </div>
-                            <div class="project-outcome">
-                                <strong>Access:</strong> Internal use only — not publicly available.
-                            </div>
                             <div class="project-actions">
-                                <button class="project-link-button" disabled>
+                                <button class="project-link-button" disabled aria-label="SFG Application Checker is for internal use only">
                                     <span>Internal Use Only</span>
                                 </button>
                             </div>
@@ -464,16 +474,16 @@
 
                         <article class="project-card portfolio-website-card" data-category="web">
                             <h3>Personal Portfolio Website</h3>
-                            <p class="project-context">Web</p>
-                            <p>Built a responsive, professional portfolio website using HTML, CSS, and JavaScript. Features include smooth navigation, tabbed content sections, and a modern corporate design aesthetic.</p>
-                            <div class="project-tools">
+                            <p class="project-subtitle">Web</p>
+                            <p class="project-summary">Built a responsive, professional portfolio website using HTML, CSS, and JavaScript. Features include smooth navigation, tabbed content sections, and a modern corporate design aesthetic.</p>
+                            <div class="project-chips" aria-label="Technologies and capabilities">
                                 <span>HTML</span>
                                 <span>CSS</span>
                                 <span>JavaScript</span>
                                 <span>Responsive Design</span>
                             </div>
                             <div class="project-actions">
-                                <a href="https://chaluska4.github.io" target="_blank" rel="noopener noreferrer" class="project-link-button">
+                                <a href="https://chaluska4.github.io" target="_blank" rel="noopener noreferrer" class="project-link-button" aria-label="Visit the personal portfolio website">
                                     <span>Visit Website</span>
                                 </a>
                             </div>
