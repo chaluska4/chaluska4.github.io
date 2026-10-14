@@ -152,7 +152,7 @@ const projectGrid = document.getElementById('project-grid');
 
 document.querySelectorAll('.project-chips').forEach(chipGroup => {
     const chips = Array.from(chipGroup.querySelectorAll(':scope > span'));
-    if (chips.length <= 6) return;
+    if (chips.length <= 6 || chipGroup.classList.contains('project-chips--show-all')) return;
 
     const overflowChips = chips.slice(6);
     overflowChips.forEach(chip => {
@@ -162,8 +162,8 @@ document.querySelectorAll('.project-chips').forEach(chipGroup => {
     const moreChip = document.createElement('span');
     moreChip.className = 'project-chip-more';
     moreChip.textContent = `+${overflowChips.length}`;
-    moreChip.title = overflowChips.map(chip => chip.textContent.trim()).join(', ');
-    moreChip.setAttribute('aria-label', `${overflowChips.length} more: ${moreChip.title}`);
+    const overflowLabels = overflowChips.map(chip => chip.textContent.trim()).join(', ');
+    moreChip.setAttribute('aria-label', `${overflowChips.length} more: ${overflowLabels}`);
     chipGroup.appendChild(moreChip);
 });
 

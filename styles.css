@@ -4327,7 +4327,11 @@ body {
 .close-acceleration-card {
     border-color: rgba(90, 134, 176, 0.72);
     background:
-        linear-gradient(150deg, rgba(61, 107, 154, 0.15), rgba(26, 34, 48, 0.94) 52%, rgba(11, 14, 20, 0.96));
+        linear-gradient(150deg, rgba(16, 29, 45, 0.88), rgba(11, 18, 29, 0.94) 52%, rgba(7, 10, 16, 0.97)),
+        url("assets/close-acceleration-bg.jpg");
+    background-position: center, center 52%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .project-featured-layout,
@@ -4370,7 +4374,7 @@ body {
 .project-chips .project-chip-more {
     color: var(--accent-light);
     border-color: rgba(90, 134, 176, 0.48);
-    cursor: help;
+    cursor: default;
 }
 
 .project-actions {
@@ -4391,10 +4395,6 @@ body {
 .project-link-button:focus-visible {
     outline: 2px solid var(--accent-light);
     outline-offset: 3px;
-}
-
-.project-link-button--todo {
-    border-style: dashed;
 }
 
 .project-card:focus-within {
