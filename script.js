@@ -152,7 +152,7 @@ const projectGrid = document.getElementById('project-grid');
 
 document.querySelectorAll('.project-chips').forEach(chipGroup => {
     const chips = Array.from(chipGroup.querySelectorAll(':scope > span'));
-    if (chips.length <= 6 || chipGroup.classList.contains('project-chips--show-all')) return;
+    if (chips.length <= 6) return;
 
     const overflowChips = chips.slice(6);
     overflowChips.forEach(chip => {
